@@ -4,7 +4,6 @@ import com.dunowljj.book.domain.posts.Posts;
 import com.dunowljj.book.domain.posts.PostsRepository;
 import com.dunowljj.book.web.dto.PostsSaveRequestDto;
 import com.dunowljj.book.web.dto.PostsUpdateRequestDto;
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
