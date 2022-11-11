@@ -5,14 +5,15 @@ var main = {
             _this.save();
         });
 
-       /* $('#btn-update').on('click', function () {
+        $('#btn-update').on('click', function () {
             _this.update();
         });
 
         $('#btn-delete').on('click', function () {
             _this.delete();
-        });*/
+        });
     },
+
     save : function () {
         var data = {
             title: $('#title').val(),
@@ -32,8 +33,9 @@ var main = {
         }).fail(function (error) {
             alert(JSON.stringify(error));
         });
-    }
-    /*update : function () {
+    },
+
+    update : function () {
         var data = {
             title: $('#title').val(),
             content: $('#content').val()
@@ -54,6 +56,7 @@ var main = {
             alert(JSON.stringify(error));
         });
     },
+
     delete : function () {
         var id = $('#id').val();
 
@@ -68,7 +71,7 @@ var main = {
         }).fail(function (error) {
             alert(JSON.stringify(error));
         });
-    }*/
+    }
 
 };
 
