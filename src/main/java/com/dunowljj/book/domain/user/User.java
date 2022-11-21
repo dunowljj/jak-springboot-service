@@ -1,6 +1,6 @@
 package com.dunowljj.book.domain.user;
 
-import com.dunowljj.book.domain.posts.BaseTimeEntity;
+import com.dunowljj.book.domain.BaseTimeEntity;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

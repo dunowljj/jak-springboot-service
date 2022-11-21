@@ -1,10 +1,13 @@
 package com.dunowljj.book.domain.posts;
 
+import com.dunowljj.book.domain.BaseTimeEntity;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+
+import static javax.persistence.GenerationType.*;
 
 @NoArgsConstructor
 @Getter
@@ -12,7 +15,7 @@ import javax.persistence.*;
 public class Posts extends BaseTimeEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = IDENTITY)
     private Long id;
 
     @Column(length = 500, nullable = false)

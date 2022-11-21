@@ -3,7 +3,7 @@ package com.dunowljj.book.web;
 import com.dunowljj.book.config.auth.LoginUser;
 import com.dunowljj.book.config.auth.SessionUser;
 import com.dunowljj.book.service.posts.PostsService;
-import com.dunowljj.book.web.dto.PostsResponseDto;
+import com.dunowljj.book.web.dto.posts.PostsResponseDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -31,13 +31,13 @@ public class IndexController {
 
     @GetMapping("/posts/save")
     public String save() {
-        return "posts-save";
+        return "posts/posts-save";
     }
 
     @GetMapping("/posts/update/{id}")
     public String update(@PathVariable Long id, Model model) {
         PostsResponseDto dto = postsService.findById(id);
         model.addAttribute("post", dto);
-        return "posts-update";
+        return "posts/posts-update";
     }
 }

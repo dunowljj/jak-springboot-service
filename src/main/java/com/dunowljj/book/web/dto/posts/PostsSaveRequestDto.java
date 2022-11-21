@@ -1,4 +1,4 @@
-package com.dunowljj.book.web.dto;
+package com.dunowljj.book.web.dto.posts;
 
 import com.dunowljj.book.domain.posts.Posts;
 import lombok.Builder;

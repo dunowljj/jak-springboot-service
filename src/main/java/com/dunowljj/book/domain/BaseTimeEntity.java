@@ -1,4 +1,4 @@
-package com.dunowljj.book.domain.posts;
+package com.dunowljj.book.domain;
 
 import lombok.Getter;
 import org.springframework.data.annotation.CreatedDate;

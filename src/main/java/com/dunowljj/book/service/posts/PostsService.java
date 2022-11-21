@@ -2,16 +2,15 @@ package com.dunowljj.book.service.posts;
 
 import com.dunowljj.book.domain.posts.Posts;
 import com.dunowljj.book.domain.posts.PostsRepository;
-import com.dunowljj.book.web.dto.PostsListResponseDto;
-import com.dunowljj.book.web.dto.PostsResponseDto;
-import com.dunowljj.book.web.dto.PostsSaveRequestDto;
-import com.dunowljj.book.web.dto.PostsUpdateRequestDto;
+import com.dunowljj.book.web.dto.posts.PostsListResponseDto;
+import com.dunowljj.book.web.dto.posts.PostsResponseDto;
+import com.dunowljj.book.web.dto.posts.PostsSaveRequestDto;
+import com.dunowljj.book.web.dto.posts.PostsUpdateRequestDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 

@@ -1,9 +1,9 @@
-package com.dunowljj.book.web;
+package com.dunowljj.book.web.posts;
 
 import com.dunowljj.book.service.posts.PostsService;
-import com.dunowljj.book.web.dto.PostsResponseDto;
-import com.dunowljj.book.web.dto.PostsSaveRequestDto;
-import com.dunowljj.book.web.dto.PostsUpdateRequestDto;
+import com.dunowljj.book.web.dto.posts.PostsResponseDto;
+import com.dunowljj.book.web.dto.posts.PostsSaveRequestDto;
+import com.dunowljj.book.web.dto.posts.PostsUpdateRequestDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
