@@ -1,6 +1,6 @@
 package com.dunowljj.book.config.auth;
 
-import com.dunowljj.book.domain.user.User;
+import com.dunowljj.book.domain.user.Member;
 import lombok.Getter;
 
 import java.io.Serializable;
@@ -11,9 +11,9 @@ public class SessionUser implements Serializable {
     private String email;
     private String picture;
 
-    public SessionUser(User user) {
-        this.name = user.getName();
-        this.email = user.getEmail();
-        this.picture = user.getPicture();
+    public SessionUser(Member member) {
+        this.name = member.getName();
+        this.email = member.getEmail();
+        this.picture = member.getPicture();
     }
 }

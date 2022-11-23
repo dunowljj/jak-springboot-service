@@ -1,5 +1,8 @@
 package com.dunowljj.book.domain.events;
 
+import com.dunowljj.book.domain.BaseTimeEntity;
+import com.dunowljj.book.domain.ticket.TicketReservation;
+import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -8,20 +11,30 @@ import javax.persistence.*;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
+import static javax.persistence.FetchType.*;
 import static javax.persistence.GenerationType.*;
 
-@NoArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
 @Entity
-public class Events {
+public class Events extends BaseTimeEntity {
 
-    @Id
-    @GeneratedValue(strategy = IDENTITY)
+    @Id @GeneratedValue(strategy = IDENTITY)
+//    @Column(name = "events_id")
     private Long id;
 
-    // todo
-    private Long hallId;
+    @OneToOne(fetch = LAZY)
+    @JoinColumn(name = "hall_id")
+    private Hall hall;
+
+    @OneToMany(mappedBy = "events")
+    private List<TicketReservation> ticketReservations = new ArrayList<>();
+
+    @OneToMany(mappedBy = "events")
+    private List<EventsRegistration> eventsRegistrations = new ArrayList<>();
 
     @Column(length = 500, nullable = false)
     private String name;
@@ -35,44 +48,37 @@ public class Events {
     private Long recruitAmount;
 
     @Column(nullable = false)
-    private LocalDate start;
+    private LocalDate startDate;
+    @Column(nullable = false)
+    private LocalDate endDate;
 
     @Column(nullable = false)
-    private LocalDate end;
+    private LocalDateTime recruitStartDate;
 
     @Column(nullable = false)
-    private LocalDateTime startRecruit;
+    private LocalDateTime recruitEndDate;
 
     @Column(nullable = false)
-    private LocalDateTime endRecruit;
-
-    // todo : @Embeddable 사용? 고정 값
-    @Enumerated(EnumType.STRING)
-    private Hall type;
-
-    // todo
-    @Enumerated(EnumType.STRING)
-    private Field field;
-
+    private String field;
 
     private Long hitCount;
 
     @Builder
-    public Events(Long id, Long hallId, String name, String detail, Long price, Long recruitAmount,
-                  LocalDate start, LocalDate end, LocalDateTime startRecruit, LocalDateTime endRecruit,
-                  Hall type, Field field,
-                  Long hitCount) {
+    public Events(Long id, Hall hall, List<TicketReservation> ticketReservations, List<EventsRegistration> eventsRegistrations, String name, String detail, Long price, Long recruitAmount,
+                  LocalDate startDate, LocalDate endDate, LocalDateTime recruitStartDate, LocalDateTime recruitEndDate,
+                  String field, Long hitCount) {
         this.id = id;
-        this.hallId = hallId;
+        this.hall = hall;
+        this.ticketReservations = ticketReservations;
+        this.eventsRegistrations = eventsRegistrations;
         this.name = name;
         this.detail = detail;
         this.price = price;
         this.recruitAmount = recruitAmount;
-        this.start = start;
-        this.end = end;
-        this.startRecruit = startRecruit;
-        this.endRecruit = endRecruit;
-        this.type = type;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.recruitStartDate = recruitStartDate;
+        this.recruitEndDate = recruitEndDate;
         this.field = field;
         this.hitCount = hitCount;
     }

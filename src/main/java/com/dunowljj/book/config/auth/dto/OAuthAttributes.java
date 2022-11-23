@@ -1,7 +1,7 @@
 package com.dunowljj.book.config.auth.dto;
 
+import com.dunowljj.book.domain.user.Member;
 import com.dunowljj.book.domain.user.Role;
-import com.dunowljj.book.domain.user.User;
 import lombok.Builder;
 import lombok.Getter;
 
@@ -54,8 +54,8 @@ public class OAuthAttributes {
                 .build();
     }
 
-    public User toEntity() {
-        return User.builder()
+    public Member toEntity() {
+        return Member.builder()
                 .name(name)
                 .email(email)
                 .picture(picture)
