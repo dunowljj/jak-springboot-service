@@ -1,6 +1,7 @@
 package com.dunowljj.book.domain.events;
 
 import com.dunowljj.book.domain.BaseTimeEntity;
+import com.dunowljj.book.domain.hall.Hall;
 import com.dunowljj.book.domain.ticket.TicketReservation;
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -9,7 +10,6 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -48,9 +48,9 @@ public class Events extends BaseTimeEntity {
     private Long recruitAmount;
 
     @Column(nullable = false)
-    private LocalDate startDate;
+    private LocalDateTime startDate;
     @Column(nullable = false)
-    private LocalDate endDate;
+    private LocalDateTime endDate;
 
     @Column(nullable = false)
     private LocalDateTime recruitStartDate;
@@ -65,7 +65,7 @@ public class Events extends BaseTimeEntity {
 
     @Builder
     public Events(Long id, Hall hall, List<TicketReservation> ticketReservations, List<EventsRegistration> eventsRegistrations, String name, String detail, Long price, Long recruitAmount,
-                  LocalDate startDate, LocalDate endDate, LocalDateTime recruitStartDate, LocalDateTime recruitEndDate,
+                  LocalDateTime startDate, LocalDateTime endDate, LocalDateTime recruitStartDate, LocalDateTime recruitEndDate,
                   String field, Long hitCount) {
         this.id = id;
         this.hall = hall;

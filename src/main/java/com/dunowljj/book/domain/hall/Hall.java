@@ -1,7 +1,8 @@
-package com.dunowljj.book.domain.events;
+package com.dunowljj.book.domain.hall;
 
 
 import com.dunowljj.book.domain.BaseTimeEntity;
+import com.dunowljj.book.domain.events.Events;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
