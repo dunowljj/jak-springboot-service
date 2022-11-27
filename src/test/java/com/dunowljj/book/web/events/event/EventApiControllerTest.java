@@ -1,12 +1,13 @@
-package com.dunowljj.book.web.events;
+package com.dunowljj.book.web.events.event;
 
-import com.dunowljj.book.domain.events.Events;
-import com.dunowljj.book.domain.events.EventsRepository;
-import com.dunowljj.book.domain.hall.Hall;
-import com.dunowljj.book.domain.hall.HallRepository;
-import com.dunowljj.book.web.dto.events.EventsRegisterRequestDto;
+import com.dunowljj.book.domain.events.event.Event;
+import com.dunowljj.book.domain.events.event.EventRepository;
+import com.dunowljj.book.domain.events.hall.Hall;
+import com.dunowljj.book.domain.events.hall.HallRepository;
+import com.dunowljj.book.web.dto.events.event.EventSaveRequestDto;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+import org.h2.jdbc.JdbcConnection;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -21,6 +22,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
+import javax.persistence.EntityManager;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -31,14 +33,13 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-public class EventsApiControllerTest {
+public class EventApiControllerTest {
 
     @LocalServerPort
     private int port;
 
     @Autowired
-    private EventsRepository eventsRepository;
-
+    private EventRepository eventRepository;
     @Autowired
     private HallRepository hallRepository;
 
@@ -67,17 +68,25 @@ public class EventsApiControllerTest {
         hallRepository.save(hall);
     }
 
+    /**
+     * auto-increment 때문인지 전체 테스트를 하면 오류가 난다. 테스트 접근 방식에 대해 고민해야한다.
+     * repository를 event와 hall 둘 다 삭제하는 경우, deleteAll 순서를 바꾸면 fk 삭제가 안돼서 오류가 발생한다.
+     */
     @AfterEach
     public void tearDown() throws Exception {
-        eventsRepository.deleteAll();
+        eventRepository.deleteAll();
+        hallRepository.deleteAll();
+//        this.entityManager
+//                .createNativeQuery("ALTER TABLE portfolio ALTER COLUMN `pofo_post_no` RESTART WITH 1")
+//                .executeUpdate();
     }
 
     @WithMockUser(username = "USER")
     @Test
-    public void Events_등록된다() throws Exception {
+    public void Event_등록된다() throws Exception {
         //when
         String name = "name";
-        Long hallId = 1L;
+        Long hallId = hallRepository.findAll().get(0).getId(); // todo: auto-increment 테스트 개선 1 : jdbc 사용 등 방법을 더 알아보자
         String detail ="detail";
         Long price = 1_000L;
         Long recruitAmount = 100L;
@@ -87,7 +96,7 @@ public class EventsApiControllerTest {
         LocalDateTime recruitEndDate =LocalDateTime.now();
         String field ="field";
 
-        EventsRegisterRequestDto requestDto = EventsRegisterRequestDto.builder()
+        EventSaveRequestDto requestDto = EventSaveRequestDto.builder()
                 .name(name)
                 .hallId(hallId)
                 .detail(detail)
@@ -100,8 +109,9 @@ public class EventsApiControllerTest {
                 .field(field)
                 .build();
 
-        String url = "http://localhost:" + port + "/events/new";
+        String url = "http://localhost:" + port + "/api/events/event/new";
 
+        // LocalDateTime 데이터 변환 처리
         ObjectMapper objectMapper = new ObjectMapper();
         objectMapper.registerModule(new JavaTimeModule());
 
@@ -111,7 +121,7 @@ public class EventsApiControllerTest {
                 .andExpect(status().isOk());
 
         //then
-        List<Events> all  = eventsRepository.findAll();
+        List<Event> all  = eventRepository.findAll();
         assertThat(all.get(0).getName()).isEqualTo(name);
         assertThat(all.get(0).getField()).isEqualTo(field);
         assertThat(all.get(0).getHall().getId()).isEqualTo(hallId);

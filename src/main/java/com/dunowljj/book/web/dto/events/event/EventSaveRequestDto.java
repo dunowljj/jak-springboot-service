@@ -1,7 +1,7 @@
-package com.dunowljj.book.web.dto.events;
+package com.dunowljj.book.web.dto.events.event;
 
-import com.dunowljj.book.domain.events.Events;
-import com.dunowljj.book.domain.hall.Hall;
+import com.dunowljj.book.domain.events.event.Event;
+import com.dunowljj.book.domain.events.hall.Hall;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
 
 @Getter
 @NoArgsConstructor
-public class EventsRegisterRequestDto {
+public class EventSaveRequestDto {
 
     private String name;
     private Long hallId;
@@ -25,7 +25,7 @@ public class EventsRegisterRequestDto {
     private String field;
 
     @Builder
-    public EventsRegisterRequestDto(String name, Long hallId, String detail, Long price, Long recruitAmount, String field, LocalDateTime startDate, LocalDateTime endDate, LocalDateTime recruitStartDate, LocalDateTime recruitEndDate) {
+    public EventSaveRequestDto(String name, Long hallId, String detail, Long price, Long recruitAmount, String field, LocalDateTime startDate, LocalDateTime endDate, LocalDateTime recruitStartDate, LocalDateTime recruitEndDate) {
         this.name = name;
         this.hallId = hallId;
         this.detail = detail;
@@ -38,10 +38,10 @@ public class EventsRegisterRequestDto {
         this.recruitEndDate = recruitEndDate;
     }
 
-    public Events toEntity(Hall hall) {
+    public Event toEntity(Hall hall) {
 
         //todo : hallID를 어떻게 처리할 것인가?
-        return Events.builder()
+        return Event.builder()
                 .hall(hall)
                 .name(name)
                 .detail(detail)

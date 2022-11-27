@@ -19,23 +19,33 @@ public class EventsController {
         return "events/home";
     }
 
-    @GetMapping("/events/reservation")
-    public String reservation(Model model,  @LoginUser SessionUser user) {
+    @GetMapping("/events/event")
+    public String event(Model model,  @LoginUser SessionUser user) {
 
         if (user != null) {
             model.addAttribute("userName", user.getName());
         }
 
-        return "events/reservation";
+        return "events/event/home";
     }
 
-    @GetMapping("/events/registration")
-    public String registration(Model model,  @LoginUser SessionUser user) {
+    @GetMapping("/events/hall")
+    public String hall(Model model, @LoginUser SessionUser user) {
 
         if (user != null) {
             model.addAttribute("userName", user.getName());
         }
 
-        return "events/registration";
+        return "events/hall/home";
+    }
+
+    @GetMapping("/events/ticket")
+    public String ticket(Model model,  @LoginUser SessionUser user) {
+
+        if (user != null) {
+            model.addAttribute("userName", user.getName());
+        }
+
+        return "events/ticket/home";
     }
 }

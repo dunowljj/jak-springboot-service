@@ -1,3 +1,6 @@
+<!DOCTYPE HTML>
+
+<html xmlns:th="http://www.thymeleaf.org">
 <div th:replace="~{layout/header :: headerFragment}"></div>
 
 <h1>게시글 등록</h1>
@@ -18,9 +21,10 @@
                 <textarea class="form-control" id="content" placeholder="내용을 입력하세요"></textarea>
             </div>
         </form>
-        <a href="/static" role="button" class="btn btn-secondary">취소</a>
+        <a href="/" role="button" class="btn btn-secondary">취소</a>
         <button type="button" class="btn btn-primary" id="btn-save">등록</button>
     </div>
 </div>
 
 <div th:replace="~{layout/footer :: footerFragment}"></div>
+</html>

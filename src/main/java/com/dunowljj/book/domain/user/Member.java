@@ -1,7 +1,7 @@
 package com.dunowljj.book.domain.user;
 
 import com.dunowljj.book.domain.BaseTimeEntity;
-import com.dunowljj.book.domain.events.EventsRegistration;
+import com.dunowljj.book.domain.events.event.EventRegistration;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -20,7 +20,7 @@ public class Member extends BaseTimeEntity {
     private Long id;
 
     @OneToMany(mappedBy = "member")
-    private List<EventsRegistration> eventsRegistrationList = new ArrayList<>();
+    private List<EventRegistration> eventRegistrationList = new ArrayList<>();
 
     @Column(nullable = false)
     private String name;
@@ -38,9 +38,9 @@ public class Member extends BaseTimeEntity {
     // todo : 생년월일, 가입날짜, 성별 등 추후에 추가
 
     @Builder
-    public Member(Long id, List<EventsRegistration> eventsRegistrationList, String name, String email, String picture, Role role) {
+    public Member(Long id, List<EventRegistration> eventRegistrationList, String name, String email, String picture, Role role) {
         this.id = id;
-        this.eventsRegistrationList = eventsRegistrationList;
+        this.eventRegistrationList = eventRegistrationList;
         this.name = name;
         this.email = email;
         this.picture = picture;

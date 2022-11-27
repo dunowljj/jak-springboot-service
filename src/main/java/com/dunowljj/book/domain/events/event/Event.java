@@ -1,8 +1,8 @@
-package com.dunowljj.book.domain.events;
+package com.dunowljj.book.domain.events.event;
 
 import com.dunowljj.book.domain.BaseTimeEntity;
-import com.dunowljj.book.domain.hall.Hall;
-import com.dunowljj.book.domain.ticket.TicketReservation;
+import com.dunowljj.book.domain.events.hall.Hall;
+import com.dunowljj.book.domain.events.ticket.TicketReservation;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
@@ -16,11 +16,12 @@ import java.util.List;
 
 import static javax.persistence.FetchType.*;
 import static javax.persistence.GenerationType.*;
+import static lombok.AccessLevel.*;
 
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@NoArgsConstructor(access = PROTECTED)
 @Getter
 @Entity
-public class Events extends BaseTimeEntity {
+public class Event extends BaseTimeEntity {
 
     @Id @GeneratedValue(strategy = IDENTITY)
 //    @Column(name = "events_id")
@@ -30,11 +31,11 @@ public class Events extends BaseTimeEntity {
     @JoinColumn(name = "hall_id")
     private Hall hall;
 
-    @OneToMany(mappedBy = "events")
+    @OneToMany(mappedBy = "event")
     private List<TicketReservation> ticketReservations = new ArrayList<>();
 
-    @OneToMany(mappedBy = "events")
-    private List<EventsRegistration> eventsRegistrations = new ArrayList<>();
+    @OneToMany(mappedBy = "event")
+    private List<EventRegistration> eventRegistrations = new ArrayList<>();
 
     @Column(length = 500, nullable = false)
     private String name;
@@ -64,13 +65,13 @@ public class Events extends BaseTimeEntity {
     private Long hitCount;
 
     @Builder
-    public Events(Long id, Hall hall, List<TicketReservation> ticketReservations, List<EventsRegistration> eventsRegistrations, String name, String detail, Long price, Long recruitAmount,
-                  LocalDateTime startDate, LocalDateTime endDate, LocalDateTime recruitStartDate, LocalDateTime recruitEndDate,
-                  String field, Long hitCount) {
+    public Event(Long id, Hall hall, List<TicketReservation> ticketReservations, List<EventRegistration> eventRegistrations, String name, String detail, Long price, Long recruitAmount,
+                 LocalDateTime startDate, LocalDateTime endDate, LocalDateTime recruitStartDate, LocalDateTime recruitEndDate,
+                 String field, Long hitCount) {
         this.id = id;
         this.hall = hall;
         this.ticketReservations = ticketReservations;
-        this.eventsRegistrations = eventsRegistrations;
+        this.eventRegistrations = eventRegistrations;
         this.name = name;
         this.detail = detail;
         this.price = price;

@@ -46,8 +46,6 @@ class PostsApiControllerTest {
                 .apply(springSecurity())
                 .build();
     }
-    @Autowired
-    private TestRestTemplate restTemplate;
 
     @Autowired
     private PostsRepository postsRepository;
