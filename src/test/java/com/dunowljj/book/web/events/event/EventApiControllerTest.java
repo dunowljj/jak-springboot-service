@@ -76,9 +76,6 @@ public class EventApiControllerTest {
     public void tearDown() throws Exception {
         eventRepository.deleteAll();
         hallRepository.deleteAll();
-//        this.entityManager
-//                .createNativeQuery("ALTER TABLE portfolio ALTER COLUMN `pofo_post_no` RESTART WITH 1")
-//                .executeUpdate();
     }
 
     @WithMockUser(username = "USER")

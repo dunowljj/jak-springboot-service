@@ -1,0 +1,35 @@
+<!DOCTYPE HTML>
+
+<html xmlns:th="http://www.thymeleaf.org">
+<header th:insert="~{layout/header :: headerFragment}"></header>
+<body>
+<div>
+  <a th:href="@{/}" style="text-decoration:none; color:inherit"><h1>스프링 부트로 시작하는 웹 서비스</h1></a>
+  <a href="/events/hall" role="button" class="btn btn-secondary">돌아가기</a>
+
+  <!--목록 출력 영역-->
+  <table class="table table-horizontal table-bordered">
+    <thead class="thead-strong">
+    <tr>
+      <th>행사장번호</th>
+      <th>행사장이름</th>
+      <th>수용인원</th>
+      <th>생성일</th>
+      <th>최종수정일</th>
+    </tr>
+    </thead>
+    <tbody>
+      <tr th:each="hall : ${hallList}">
+        <td th:text="${hall.id}"></td>
+        <td><a th:text="${hall.name}" th:href="@{/hall/update/{id}(id=${hall.id})}"></a></td>
+        <td th:text="${hall.capacity}"></td>
+        <td th:text="${#temporals.format(hall.createdDate, 'yyyy-MM-dd HH:mm:ss')}"></td>
+        <td th:text="${#temporals.format(hall.modifiedDate, 'yyyy-MM-dd HH:mm:ss')}"></td>
+      </tr>
+    </tbody>
+  </table>
+
+</div>
+<footer th:insert="~{layout/events-footer :: footerFragment}"></footer>
+</body>
+</html>

@@ -1,7 +1,5 @@
 package com.dunowljj.book.domain.events.hall;
 
-import com.dunowljj.book.web.dto.events.hall.HallSaveRequestDto;
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

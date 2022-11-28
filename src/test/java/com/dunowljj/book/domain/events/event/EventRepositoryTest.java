@@ -2,9 +2,7 @@ package com.dunowljj.book.domain.events.event;
 
 import com.dunowljj.book.domain.events.hall.Hall;
 import com.dunowljj.book.domain.events.hall.HallRepository;
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
