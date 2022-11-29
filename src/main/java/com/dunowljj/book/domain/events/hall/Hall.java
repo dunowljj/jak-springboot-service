@@ -3,6 +3,7 @@ package com.dunowljj.book.domain.events.hall;
 
 import com.dunowljj.book.domain.BaseTimeEntity;
 import com.dunowljj.book.domain.events.event.Event;
+import com.dunowljj.book.web.dto.events.hall.HallUpdateRequestDto;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -36,5 +37,10 @@ public class Hall extends BaseTimeEntity {
         this.event = event;
         this.name = name;
         this.capacity = capacity;
+    }
+
+    public void update(HallUpdateRequestDto requestDto) {
+        this.name = requestDto.getName();
+        this.capacity = requestDto.getCapacity();
     }
 }

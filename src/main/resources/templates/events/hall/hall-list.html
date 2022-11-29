@@ -21,7 +21,7 @@
     <tbody>
       <tr th:each="hall : ${hallList}">
         <td th:text="${hall.id}"></td>
-        <td><a th:text="${hall.name}" th:href="@{/hall/update/{id}(id=${hall.id})}"></a></td>
+        <td><a th:text="${hall.name}" th:href="@{update/{id}(id=${hall.id})}"></a></td>
         <td th:text="${hall.capacity}"></td>
         <td th:text="${#temporals.format(hall.createdDate, 'yyyy-MM-dd HH:mm:ss')}"></td>
         <td th:text="${#temporals.format(hall.modifiedDate, 'yyyy-MM-dd HH:mm:ss')}"></td>

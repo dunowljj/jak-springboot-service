@@ -14,24 +14,23 @@ public class EventSaveRequestDto {
 
     private String name;
     private Long hallId;
+    private String field;
     private String detail;
     private Long price;
     private Long recruitAmount;
-
     private LocalDateTime startDate;
     private LocalDateTime endDate;
     private LocalDateTime recruitStartDate;
     private LocalDateTime recruitEndDate;
-    private String field;
 
     @Builder
     public EventSaveRequestDto(String name, Long hallId, String detail, Long price, Long recruitAmount, String field, LocalDateTime startDate, LocalDateTime endDate, LocalDateTime recruitStartDate, LocalDateTime recruitEndDate) {
         this.name = name;
         this.hallId = hallId;
+        this.field = field;
         this.detail = detail;
         this.price = price;
         this.recruitAmount = recruitAmount;
-        this.field = field;
         this.startDate = startDate;
         this.endDate = endDate;
         this.recruitStartDate = recruitStartDate;
@@ -42,12 +41,12 @@ public class EventSaveRequestDto {
 
         //todo : hallID를 어떻게 처리할 것인가?
         return Event.builder()
-                .hall(hall)
                 .name(name)
+                .hall(hall)
+                .field(field)
                 .detail(detail)
                 .price(price)
                 .recruitAmount(recruitAmount)
-                .field(field)
                 .startDate(startDate)
                 .endDate(endDate)
                 .recruitStartDate(recruitStartDate)

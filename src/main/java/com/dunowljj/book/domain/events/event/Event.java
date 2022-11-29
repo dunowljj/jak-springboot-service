@@ -3,6 +3,7 @@ package com.dunowljj.book.domain.events.event;
 import com.dunowljj.book.domain.BaseTimeEntity;
 import com.dunowljj.book.domain.events.hall.Hall;
 import com.dunowljj.book.domain.events.ticket.TicketReservation;
+import com.dunowljj.book.web.dto.events.event.EventUpdateRequestDto;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
@@ -82,5 +83,18 @@ public class Event extends BaseTimeEntity {
         this.recruitEndDate = recruitEndDate;
         this.field = field;
         this.hitCount = hitCount;
+    }
+
+    public void update(EventUpdateRequestDto requestDto, Hall hall) {
+        this.hall = hall;
+        this.name = requestDto.getName();
+        this.detail = requestDto.getDetail();
+        this.price = requestDto.getPrice();
+        this.recruitAmount = requestDto.getRecruitAmount();
+        this.startDate = requestDto.getStartDate();
+        this.endDate = requestDto.getEndDate();
+        this.recruitStartDate = requestDto.getRecruitStartDate();
+        this.recruitEndDate = requestDto.getRecruitEndDate();
+        this.field = requestDto.getField();
     }
 }

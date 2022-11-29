@@ -29,8 +29,8 @@
     <tbody>
     <tr th:each="event : ${eventList}">
       <td th:text="${event.id}"></td>
-      <td><a th:text="${event.name}" th:href="@{/event/update/{id}(id=${event.id})}"></a></td>
-      <td th:text="${event.hall.getName()}"></td>
+      <td><a th:text="${event.name}" th:href="@{/events/event/{id}(id=${event.id})}"></a></td>
+      <td th:text="${event.getHallId()}"></td>
       <td th:text="${event.field}"></td>
       <td th:text="${event.detail}"></td>
       <td th:text="${event.price}"></td>
