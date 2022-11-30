@@ -37,4 +37,5 @@ public class EventRegistration extends BaseTimeEntity {
         this.event = event;
         this.member = member;
     }
+
 }

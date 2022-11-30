@@ -12,7 +12,7 @@ import javax.persistence.*;
 
 import static javax.persistence.FetchType.*;
 import static javax.persistence.GenerationType.*;
-
+// todo: 행사장 등록에 대해 멤버 관련한 연관관계 필요
 @NoArgsConstructor
 @Getter
 @Entity

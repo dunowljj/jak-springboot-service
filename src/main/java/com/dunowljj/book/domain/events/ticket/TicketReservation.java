@@ -8,11 +8,10 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-
 import java.time.LocalDate;
 
-import static javax.persistence.FetchType.*;
-import static javax.persistence.GenerationType.*;
+import static javax.persistence.FetchType.LAZY;
+import static javax.persistence.GenerationType.IDENTITY;
 
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
@@ -37,7 +36,6 @@ public class TicketReservation {
     @Column(nullable = false)
     private Long price;
 
-
     @Column(nullable = false)
     private Long amount;
 
@@ -49,10 +47,11 @@ public class TicketReservation {
     private ReservationStatus ticketStatus;
 
     @Builder
-    public TicketReservation(Long id, Event event, Member member, Long price, Long amount, LocalDate reservationDate, ReservationStatus ticketStatus) {
+    public TicketReservation(Long id, Event event, Member member, TicketPayment ticketPayment, Long price, Long amount, LocalDate reservationDate, ReservationStatus ticketStatus) {
         this.id = id;
         this.event = event;
         this.member = member;
+        this.ticketPayment = ticketPayment;
         this.price = price;
         this.amount = amount;
         this.reservationDate = reservationDate;
