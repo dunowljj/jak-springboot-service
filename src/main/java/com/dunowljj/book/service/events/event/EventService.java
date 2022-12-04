@@ -73,6 +73,11 @@ public class EventService {
 
     @Transactional
     public void delete(Long id) {
+        EventRegistration eventRegistration = registrationRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("해당 행사등록이 존재하지 않습니다."));
+
+        registrationRepository.delete(eventRegistration);
+
         Event event = eventRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("해당 행사가 존재하지 않습니다. id =" + id));
         eventRepository.delete(event);
