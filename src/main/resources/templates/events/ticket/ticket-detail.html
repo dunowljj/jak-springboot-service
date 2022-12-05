@@ -1,0 +1,64 @@
+<!DOCTYPE HTML>
+
+<html xmlns:th="http://www.thymeleaf.org">
+<div th:replace="~{events/layout/header :: headerFragment}"></div>
+
+<h1>행사 등록</h1>
+
+<div class="col-md-12">
+    <div class="col-md-4">
+        <form role="form" action="/event/new" method="post">
+            <div class="form-group">
+                <label for="id">행사 번호</label>
+                <input type="text" class="form-control" id="id" th:value = "${event.id}" readonly/>
+            </div>
+            <div class="form-group">
+                <label for="name">행사명</label>
+                <input type="text" class="form-control" id="name" th:value = "${event.name}" readonly/>
+            </div>
+            <div class="form-group">
+                <label for="hallId">행사장 선택</label>
+                <input type="number" class="form-control" id="hallId" th:value = "${event.hallId}" readonly/>
+            </div>
+            <div class="form-group">
+                <label for="field">행사 분야</label>
+                <input class="form-control" id="field" th:value = "${event.field}" readonly/>
+            </div>
+            <div class="form-group">
+                <label for="detail">행사 설명</label>
+                <textarea class="form-control" id="detail" th:text = "${event.detail}" readonly/>
+            </div>
+            <div class="form-group">
+                <label for="price">입장권 가격</label>
+                <input class="form-control" id="price" th:value = "${event.price}" readonly/>
+            </div>
+            <div class="form-group">
+                <label for="recruitAmount">모집 인원</label>
+                <input class="form-control" id="recruitAmount" th:value = "${event.recruitAmount}" readonly/>
+            </div>
+            <div class="form-group">
+                <label for="startDate">행사 시작일</label>
+                <input type = "datetime-local" class="form-control" id="startDate" th:value = "${event.startDate}" readonly/>
+            </div>
+            <div class="form-group">
+                <label for="endDate">행사 종료일</label>
+                <input type = "datetime-local" class="form-control" id="endDate" th:value = "${event.endDate}" readonly/>
+            </div>
+            <div class="form-group">
+                <label for="recruitStartDate">모집 시작일</label>
+                <input type = "datetime-local" class="form-control" id="recruitStartDate" th:value = "${event.recruitStartDate}" readonly/>
+            </div>
+            <div class="form-group">
+                <label for="recruitEndDate">모집 마감일</label>
+                <input type = "datetime-local" class="form-control" id="recruitEndDate"th:value = "${event.recruitEndDate}" readonly/>
+            </div>
+
+        </form>
+        <a th:href="@{/events/ticket/list}" role="button" class="btn btn-secondary">취소</a>
+<!--        <a th:href="@{/events/ticket/update}" role="button" type="button" class="btn btn-primary" id="btn-event-update">수정</a>-->
+<!--        <button type="button" class="btn btn-danger" id="btn-event-delete">삭제</button>-->
+    </div>
+</div>
+
+<div th:replace="~{events/layout/event-footer :: footerFragment}" ></div>
+</html>
