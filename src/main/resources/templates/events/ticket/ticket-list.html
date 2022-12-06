@@ -29,7 +29,7 @@
     <tbody>
     <tr th:each="event : ${eventList}">
       <td th:text="${event.id}"></td>
-      <td><a th:text="${event.name}" th:href="@{/events/ticket/{id}(id=${event.id})}"></a></td>
+      <td><a th:text="${event.name}" th:href="@{/events/ticket/detail/{id}(id=${event.id})}"></a></td>
       <td th:text="${event.getHallId()}"></td>
       <td th:text="${event.field}"></td>
       <td th:text="${event.detail}"></td>
@@ -41,7 +41,7 @@
       <td th:text="${#temporals.format(event.endDate, 'yyyy-MM-dd HH:mm')}"></td>
       <td th:text="${#temporals.format(event.createdDate, 'yyyy-MM-dd HH:mm:ss')}"></td>
       <td th:text="${#temporals.format(event.modifiedDate, 'yyyy-MM-dd HH:mm:ss')}"></td>
-      <td><button type="button" class="btn btn-primary" id="btn-ticket-reserve">예약</button></td>
+      <td><a th:href="@{/events/ticket/reserve/{id}(id=${event.id})}" type="button" class="btn btn-primary">예약</a></td>
     </tr>
     </tbody>
   </table>
