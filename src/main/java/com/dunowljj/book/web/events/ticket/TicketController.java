@@ -22,9 +22,15 @@ public class TicketController {
         return "/events/ticket/ticket-list";
     }
 
-    @GetMapping("/ticket/{id}")
+    @GetMapping("/ticket/detail/{id}")
     public String detail(@PathVariable Long id, Model model) {
         model.addAttribute("event", eventService.findById(id));
         return "/events/ticket/ticket-detail";
+    }
+
+    @GetMapping("/ticket/reserve/{id}")
+    private String reserve(@PathVariable Long id, Model model) {
+        model.addAttribute("event", eventService.findById(id));
+        return "/events/ticket/ticket-reserve";
     }
 }

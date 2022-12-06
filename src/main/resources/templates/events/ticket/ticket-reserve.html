@@ -30,7 +30,7 @@
             </div>
             <div class="form-group">
                 <label for="price">입장권 가격</label>
-                <input class="form-control" id="price" th:value = "${event.price}" readonly/>
+                <input type="number" class="form-control" id="price" th:value = "${event.price}" readonly/>
             </div>
             <div class="form-group">
                 <label for="recruitAmount">모집 인원</label>
@@ -52,11 +52,13 @@
                 <label for="recruitEndDate">모집 마감일</label>
                 <input type = "datetime-local" class="form-control" id="recruitEndDate"th:value = "${event.recruitEndDate}" readonly/>
             </div>
-
+            <div class="form-group">
+                <label for="amount">티켓 예매 수량</label>
+                <input type="number" class="form-control" id="amount"/>
+            </div>
         </form>
         <a th:href="@{/events/ticket/list}" role="button" class="btn btn-secondary">취소</a>
-<!--        <a th:href="@{/events/ticket/update}" role="button" type="button" class="btn btn-primary" id="btn-event-update">수정</a>-->
-<!--        <button type="button" class="btn btn-danger" id="btn-event-delete">삭제</button>-->
+        <a role="button" type="button" class="btn btn-primary" id="btn-ticket-reserve">예약</a>
     </div>
 </div>
 
