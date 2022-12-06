@@ -30,8 +30,8 @@ public class TicketReservation {
     @JoinColumn(name = "member_id")
     private Member member;
 
-    @OneToOne(fetch = LAZY)
-    private TicketPayment ticketPayment;
+//    @OneToOne(fetch = LAZY)
+//    private TicketPayment ticketPayment;
 
     @Column(nullable = false)
     private Long price;
@@ -47,11 +47,10 @@ public class TicketReservation {
     private ReservationStatus ticketStatus;
 
     @Builder
-    public TicketReservation(Long id, Event event, Member member, TicketPayment ticketPayment, Long price, Long amount, LocalDate reservationDate, ReservationStatus ticketStatus) {
+    public TicketReservation(Long id, Event event, Member member, Long price, Long amount, LocalDate reservationDate, ReservationStatus ticketStatus) {
         this.id = id;
         this.event = event;
         this.member = member;
-        this.ticketPayment = ticketPayment;
         this.price = price;
         this.amount = amount;
         this.reservationDate = reservationDate;

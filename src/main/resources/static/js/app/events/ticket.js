@@ -1,25 +1,27 @@
 var main = {
     init : function () {
         var _this = this;
-        $('#btn-ticket-save').on('click', function () {
+        $('#btn-ticket-reserve').on('click', function () {
             _this.save();
         });
     },
     save: function () {
         var data = {
-            name: $('#name').val(),
-            capacity: $('#capacity').val()
+            eventId: $('#eventId').val(),
+            price: $('#price').val(),
+            amount: $('#amount').val(),
+            reservationDate: $('#reservationDate').val()
         };
 
         $.ajax({
             type: 'POST',
-            url: '/api/events/ticket/new',
+            url: '/api/events/ticket/reserve',
             dataType: 'json',
             contentType: 'application/json; charset=utf-8',
             data: JSON.stringify(data)
         }).done(function () {
-            alert('행사장이 등록되었습니다.');
-            window.location.href = '/events/ticket';
+            alert('행사가 예약되었습니다.');
+            window.location.href = '/events/ticket/list';
         }).fail(function (error) {
             alert(JSON.stringify(error));
         });
