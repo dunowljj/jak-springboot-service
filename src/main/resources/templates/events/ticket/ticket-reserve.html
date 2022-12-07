@@ -7,7 +7,7 @@
 
 <div class="col-md-12">
     <div class="col-md-4">
-        <form role="form" action="/event/new" method="post">
+        <form role="form">
             <div class="form-group">
                 <label for="eventId">행사 번호</label>
                 <input class="form-control" id="eventId" th:value = "${event.id}" readonly/>
@@ -62,7 +62,7 @@
             </div>
         </form>
         <a th:href="@{/events/ticket/list}" role="button" class="btn btn-secondary">취소</a>
-        <a role="button" type="button" class="btn btn-primary" id="btn-ticket-reserve">예약</a>
+        <button type="button" class="btn btn-primary" id="btn-ticket-reserve">예약</button>
     </div>
 </div>
 

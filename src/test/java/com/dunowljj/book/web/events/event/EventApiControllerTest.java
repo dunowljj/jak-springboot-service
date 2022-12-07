@@ -42,7 +42,6 @@ public class EventApiControllerTest {
     private EventRepository eventRepository;
     @Autowired
     private HallRepository hallRepository;
-
     @Autowired
     private WebApplicationContext context;
 
