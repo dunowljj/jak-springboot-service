@@ -10,11 +10,11 @@
         <form role="form" action="/event/new" method="post">
             <div class="form-group">
                 <label for="name">행사명</label>
-                <input type="text" class="form-control" id="name" placeholder="제목을 입력하세요">
+                <input type="text" class="form-control" id="name" placeholder="제목을 입력하세요"/>
             </div>
             <div class="form-group">
                 <label for="hallId">행사장 선택</label>
-                <input type="number" class="form-control" id="hallId" placeholder="작성자를 입력하세요">
+                <input type="number" class="form-control" id="hallId" placeholder="작성자를 입력하세요"/>
             </div>
             <div class="form-group">
                 <label for="field">행사 분야</label>
@@ -26,31 +26,31 @@
             </div>
             <div class="form-group">
                 <label for="price">입장권 가격</label>
-                <input type="number" class="form-control" id="price" placeholder="내용을 입력하세요"></input>
+                <input type="number" class="form-control" id="price" placeholder="내용을 입력하세요"/>
             </div>
             <div class="form-group">
                 <label for="recruitAmount">모집 인원</label>
-                <input type="number" class="form-control" id="recruitAmount" placeholder="내용을 입력하세요"></input>
+                <input type="number" class="form-control" id="recruitAmount" placeholder="내용을 입력하세요"/>
             </div>
             <div class="form-group">
                 <label for="startDate">행사 시작일</label>
-                <input type = "datetime-local" class="form-control" id="startDate" placeholder="내용을 입력하세요"></input>
+                <input type="datetime-local" class="form-control" id="startDate" placeholder="내용을 입력하세요"/>
             </div>
             <div class="form-group">
                 <label for="endDate">행사 종료일</label>
-                <input type = "datetime-local" class="form-control" id="endDate" placeholder="내용을 입력하세요"></input>
+                <input type="datetime-local" class="form-control" id="endDate" placeholder="내용을 입력하세요"/>
             </div>
             <div class="form-group">
                 <label for="recruitStartDate">모집 시작일</label>
-                <input type = "datetime-local" class="form-control" id="recruitStartDate" placeholder="내용을 입력하세요"></input>
+                <input type="datetime-local" class="form-control" id="recruitStartDate" placeholder="내용을 입력하세요"/>
             </div>
             <div class="form-group">
                 <label for="recruitEndDate">모집 마감일</label>
-                <input type = "datetime-local" class="form-control" id="recruitEndDate" placeholder="내용을 입력하세요" value="today"></input>
+                <input type="datetime-local" class="form-control" id="recruitEndDate" placeholder="내용을 입력하세요" value="today"/>
 
             </div>
         </form>
-        <a href="/events/event" role="button" class="btn btn-secondary">취소</a>
+        <a th:href="@{/events/event}" role="button" class="btn btn-secondary">취소</a>
         <button type="button" class="btn btn-primary" id="btn-event-save">등록</button>
     </div>
 </div>
