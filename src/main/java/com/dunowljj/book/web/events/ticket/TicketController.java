@@ -1,6 +1,7 @@
 package com.dunowljj.book.web.events.ticket;
 
 import com.dunowljj.book.service.events.event.EventService;
+import com.dunowljj.book.service.events.ticket.TicketReservationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class TicketController {
 
     private final EventService eventService;
+    private final TicketReservationService reservationService;
 
     @GetMapping("/ticket/list")
     public String save(Model model) {
@@ -32,5 +34,11 @@ public class TicketController {
     private String reserve(@PathVariable Long id, Model model) {
         model.addAttribute("event", eventService.findById(id));
         return "/events/ticket/ticket-reserve";
+    }
+
+    @GetMapping("/ticket/reserveList")
+    private String reserve(Model model) {
+        model.addAttribute("reservationList", reservationService.findAllDESC());
+        return "/events/ticket/ticket-reserveList";
     }
 }

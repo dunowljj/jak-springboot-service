@@ -5,9 +5,9 @@ var main = {
             _this.save();
         }),
 
-            $('#btn-hall-update').on('click', function () {
-                _this.update();
-            });
+        $('#btn-hall-update').on('click', function () {
+            _this.update();
+        });
 
         $('#btn-hall-delete').on('click', function () {
             _this.delete();
