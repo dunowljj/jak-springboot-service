@@ -28,9 +28,7 @@ public class TicketPayment {
     @Column(nullable = false)
     private LocalDate payDate;
     @Column(nullable = false)
-    private Long price;
-    @Column(nullable = false)
-    private Long amount;
+    private Long total;
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
@@ -41,12 +39,11 @@ public class TicketPayment {
     private PayStatus payStatus;
 
     @Builder
-    public TicketPayment(Long id, TicketReservation ticketReservation, LocalDate payDate, Long price, Long amount, PayGroup payGroup, PayStatus payStatus) {
+    public TicketPayment(Long id, TicketReservation ticketReservation, LocalDate payDate, Long total, PayGroup payGroup, PayStatus payStatus) {
         this.id = id;
         this.ticketReservation = ticketReservation;
         this.payDate = payDate;
-        this.price = price;
-        this.amount = amount;
+        this.total = total;
         this.payGroup = payGroup;
         this.payStatus = payStatus;
     }

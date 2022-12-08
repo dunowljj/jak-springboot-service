@@ -1,4 +1,4 @@
-var main = {
+var reserve_main = {
     init : function () {
         var _this = this;
 
@@ -6,9 +6,9 @@ var main = {
             _this.save();
         });
 
-        $('#btn-ticket-cancelReservation').on('click', function () {
+        $('#btn-ticket-cancel').on('click', function () {
             _this.delete();
-        });
+        })
     },
     save: function () {
         var data = {
@@ -35,11 +35,9 @@ var main = {
     delete : function () {
         var id = $('#id').val();
 
-        console.log(id + 'ddfdsfdfdsfasd왜안돼');
-
         $.ajax({
             type: 'DELETE',
-            url: '/api/events/ticket/' + id + '/ticket-reserve',
+            url: '/api/events/ticket/' + id + '/reserve',
             dataType: 'json',
             contentType: 'application/json; charset=utf-8',
         }).done(function () {
@@ -51,4 +49,37 @@ var main = {
     }
 }
 
-main.init();
+var pay_main = {
+    init : function () {
+        var _this = this;
+
+        $('#btn-ticket-pay').on('click', function () {
+            _this.save();
+        });
+    },
+    save: function () {
+
+        var data = {
+            reservationId: $('#reservationId').val(),
+            total: $('#total').val(),
+            payGroup: $('#payGroup').val()
+        };
+
+        $.ajax({
+            type: 'POST',
+            url: '/api/events/ticket/pay',
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            data: JSON.stringify(data)
+        }).done(function () {
+            alert('행사가 결제되었습니다.');
+            window.location.href = '/events/ticket/reserveList';
+        }).fail(function (error) {
+            alert(JSON.stringify(error));
+        });
+    }
+}
+
+
+reserve_main.init();
+pay_main.init();

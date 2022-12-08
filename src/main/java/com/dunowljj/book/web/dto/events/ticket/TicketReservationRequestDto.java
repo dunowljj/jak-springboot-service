@@ -12,15 +12,15 @@ import java.time.LocalDate;
 
 @Getter
 @NoArgsConstructor
-public class TicketReserveRequestDto {
+public class TicketReservationRequestDto {
     private Long eventId;
     private Long price;
     private Long amount;
     private LocalDate reservationDate;
-    private ReservationStatus ticketStatus = ReservationStatus.READY;
+    private ReservationStatus reservationStatus = ReservationStatus.READY;
 
     @Builder
-    public TicketReserveRequestDto(Long eventId, Long price, Long amount, LocalDate reservationDate) {
+    public TicketReservationRequestDto(Long eventId, Long price, Long amount, LocalDate reservationDate) {
         this.eventId = eventId;
         this.price = price;
         this.amount = amount;
@@ -34,7 +34,7 @@ public class TicketReserveRequestDto {
                 .price(price)
                 .amount(amount)
                 .reservationDate(reservationDate)
-                .ticketStatus(ticketStatus)
+                .reservationStatus(reservationStatus)
                 .build();
     }
 }

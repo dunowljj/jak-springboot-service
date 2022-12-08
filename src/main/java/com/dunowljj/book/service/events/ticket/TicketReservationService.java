@@ -6,8 +6,9 @@ import com.dunowljj.book.domain.events.event.EventRegistrationRepository;
 import com.dunowljj.book.domain.events.event.EventRepository;
 import com.dunowljj.book.domain.events.ticket.TicketReservation;
 import com.dunowljj.book.domain.events.ticket.TicketReservationRepository;
-import com.dunowljj.book.web.dto.events.ticket.TicketReserveListResponseDto;
-import com.dunowljj.book.web.dto.events.ticket.TicketReserveRequestDto;
+import com.dunowljj.book.web.dto.events.ticket.TicketReservationResponseDto;
+import com.dunowljj.book.web.dto.events.ticket.TicketReservationListResponseDto;
+import com.dunowljj.book.web.dto.events.ticket.TicketReservationRequestDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -24,7 +25,7 @@ public class TicketReservationService {
     private final EventRepository eventRepository;
 
     @Transactional
-    public Long reserve(TicketReserveRequestDto requestDto) {
+    public Long reserve(TicketReservationRequestDto requestDto) {
         Long eventId = requestDto.getEventId();
         Event event = eventRepository.findById(eventId)
                 .orElseThrow(() -> new IllegalArgumentException("해당 행사가 존재하지 않습니다. id="+ eventId));
@@ -35,10 +36,10 @@ public class TicketReservationService {
        return reservationRepository.save(requestDto.toEntity(event, registration.getMember())).getId();
     }
 
-    @Transactional
-    public List<TicketReserveListResponseDto> findAllDESC() {
+    @Transactional(readOnly = true)
+    public List<TicketReservationListResponseDto> findAllDESC() {
         return reservationRepository.findAllDESC().stream()
-                .map(TicketReserveListResponseDto::new)
+                .map(TicketReservationListResponseDto::new)
                 .collect(Collectors.toList());
     }
 
@@ -49,5 +50,11 @@ public class TicketReservationService {
 
         reservationRepository.delete(reservation);
         return;
+    }
+
+    public TicketReservationResponseDto findById(Long id) {
+        TicketReservation reservation = reservationRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("해당 행사예약정보가 존재하지 않습니다. id=" + id));
+        return new TicketReservationResponseDto(reservation);
     }
 }

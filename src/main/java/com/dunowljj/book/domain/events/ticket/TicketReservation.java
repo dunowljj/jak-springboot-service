@@ -44,16 +44,20 @@ public class TicketReservation {
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private ReservationStatus ticketStatus;
+    private ReservationStatus reservationStatus;
 
     @Builder
-    public TicketReservation(Long id, Event event, Member member, Long price, Long amount, LocalDate reservationDate, ReservationStatus ticketStatus) {
+    public TicketReservation(Long id, Event event, Member member, Long price, Long amount, LocalDate reservationDate, ReservationStatus reservationStatus) {
         this.id = id;
         this.event = event;
         this.member = member;
         this.price = price;
         this.amount = amount;
         this.reservationDate = reservationDate;
-        this.ticketStatus = ticketStatus;
+        this.reservationStatus = reservationStatus;
+    }
+
+    public void complete() {
+        reservationStatus = ReservationStatus.COMP;
     }
 }
