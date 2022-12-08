@@ -19,11 +19,12 @@ public class TicketController {
     private final TicketReservationService reservationService;
 
     @GetMapping("/ticket/list")
-    public String save(Model model) {
+    public String list(Model model) {
         model.addAttribute("eventList", eventService.findAllDESC());
         return "/events/ticket/ticket-list";
     }
 
+    // todo : ticket-detail과 event-update의 중복
     @GetMapping("/ticket/detail/{id}")
     public String detail(@PathVariable Long id, Model model) {
         model.addAttribute("event", eventService.findById(id));
@@ -31,14 +32,22 @@ public class TicketController {
     }
 
     @GetMapping("/ticket/reserve/{id}")
-    private String reserve(@PathVariable Long id, Model model) {
+    public String reserve(@PathVariable Long id, Model model) {
         model.addAttribute("event", eventService.findById(id));
         return "/events/ticket/ticket-reserve";
     }
 
     @GetMapping("/ticket/reserveList")
-    private String reserve(Model model) {
+    public String reserveList(Model model) {
         model.addAttribute("reservationList", reservationService.findAllDESC());
         return "/events/ticket/ticket-reserveList";
     }
+
+    // todo : 네이밍, 조회하지 않고 파라미터로 넘기기?
+    @GetMapping("/ticket/pay/{id}")
+    public String pay(@PathVariable Long id, Model model) {
+        model.addAttribute("reservation", reservationService.findById(id));
+        return "/events/ticket/ticket-pay";
+    }
+
 }

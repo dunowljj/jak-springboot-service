@@ -7,7 +7,7 @@ import lombok.Getter;
 import java.time.LocalDate;
 
 @Getter
-public class TicketReserveListResponseDto {
+public class TicketReservationListResponseDto {
 
     private Long id;
     private Long price;
@@ -17,13 +17,13 @@ public class TicketReserveListResponseDto {
     private LocalDate reservationDate;
     private ReservationStatus ticketStatus;
 
-    public TicketReserveListResponseDto(TicketReservation entity) {
+    public TicketReservationListResponseDto(TicketReservation entity) {
         this.id = entity.getId();
         this.price = entity.getPrice();
         this.amount = entity.getAmount();
         this.eventName = entity.getEvent().getName();
         this.eventId = entity.getEvent().getId();
         this.reservationDate = entity.getReservationDate();
-        this.ticketStatus = entity.getTicketStatus();
+        this.ticketStatus = entity.getReservationStatus();
     }
 }
