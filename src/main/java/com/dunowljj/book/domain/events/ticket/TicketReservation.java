@@ -60,4 +60,8 @@ public class TicketReservation {
     public void complete() {
         reservationStatus = ReservationStatus.COMP;
     }
+
+    public void cancel() {
+        this.reservationStatus = ReservationStatus.CANCEL;
+    }
 }

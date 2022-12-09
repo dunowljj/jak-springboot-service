@@ -6,9 +6,9 @@ import com.dunowljj.book.domain.events.event.EventRegistrationRepository;
 import com.dunowljj.book.domain.events.event.EventRepository;
 import com.dunowljj.book.domain.events.ticket.TicketReservation;
 import com.dunowljj.book.domain.events.ticket.TicketReservationRepository;
-import com.dunowljj.book.web.dto.events.ticket.TicketReservationResponseDto;
 import com.dunowljj.book.web.dto.events.ticket.TicketReservationListResponseDto;
 import com.dunowljj.book.web.dto.events.ticket.TicketReservationRequestDto;
+import com.dunowljj.book.web.dto.events.ticket.TicketReservationResponseDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -56,5 +56,11 @@ public class TicketReservationService {
         TicketReservation reservation = reservationRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("해당 행사예약정보가 존재하지 않습니다. id=" + id));
         return new TicketReservationResponseDto(reservation);
+    }
+
+    public void cancel(Long id) {
+        TicketReservation reservation = reservationRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("해당 행사예약정보가 존재하지 않습니다. id=" + id));
+        reservation.cancel();
     }
 }

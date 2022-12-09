@@ -1,10 +1,46 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+<!DOCTYPE HTML>
 
+<html xmlns:th="http://www.thymeleaf.org">
+<header th:insert="~{events/layout/header :: headerFragment}"></header>
+<body>
+<div>
+    <a th:href="@{/}" style="text-decoration:none; color:inherit"><h1>스프링 부트로 시작하는 웹 서비스</h1></a>
+    <a th:href="@{/events/ticket}" role="button" class="btn btn-secondary">돌아가기</a>
+
+    <!--목록 출력 영역-->
+    <table class="table table-horizontal table-bordered">
+        <thead class="thead-strong">
+        <tr>
+            <th>결제번호</th>
+            <th>행사이름</th>
+            <th>입장권 가격</th>
+            <th>구매 수량</th>
+            <th>결제 금액</th>
+            <th>결제 방법</th>
+            <th>결제 날짜</th>
+            <th>결제 상태</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="payment : ${paymentList}">
+            <td th:text="${payment.id}"></td>
+            <td><a th:text="${payment.eventName}" th:href="@{/events/ticket/detail/{id}(id=${payment.reservationId})}"></a></td>
+            <td th:text="${payment.price}"></td>
+            <td th:text="${payment.amount}"></td>
+            <td th:text="${payment.total}"></td>
+            <td th:text="${payment.payGroup}"></td>
+            <td th:text="${#temporals.format(payment.payDate, 'yyyy-MM-dd HH:mm:ss')} "></td>
+            <td th:text="${payment.payStatus}"></td>
+            <td>
+                <button th:if="${payment.payStatus.name() == 'COMP'}" type="button" class="btn btn-danger btn-ticket-refund">환불하기</button>
+                <input th:id="id" type="text" th:value="${payment.id}" hidden/>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+</div>
+<footer th:insert="~{events/layout/ticket-footer :: footerFragment}"></footer>
 </body>
 </html>

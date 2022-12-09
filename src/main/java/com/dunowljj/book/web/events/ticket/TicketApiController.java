@@ -17,12 +17,12 @@ public class TicketApiController {
 
     @PostMapping("/ticket/reserve")
     public Long reserve(@RequestBody TicketReservationRequestDto requestDto) {
-       return reservationService.reserve(requestDto);
+        return reservationService.reserve(requestDto);
     }
 
     @DeleteMapping("/ticket/{id}/reserve")
     public Long cancel(@PathVariable Long id) {
-        reservationService.delete(id);
+        reservationService.cancel(id);
         return id;
     }
 
@@ -30,5 +30,10 @@ public class TicketApiController {
     @PostMapping("ticket/pay")
     public Long pay(@RequestBody TicketPaymentSaveRequestDto requestDto) {
         return paymentService.pay(requestDto);
+    }
+
+    @PutMapping("ticket/{id}/pay")
+    public Long refund(@PathVariable Long id) {
+        return paymentService.refund(id);
     }
 }
