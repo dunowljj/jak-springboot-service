@@ -1,0 +1,42 @@
+<!DOCTYPE HTML>
+
+<html xmlns:th="http://www.thymeleaf.org">
+<header th:insert="~{events/layout/header :: headerFragment}"></header>
+<body>
+<div>
+    <a th:href="@{/}" style="text-decoration:none; color:inherit"><h1>스프링 부트로 시작하는 웹 서비스</h1></a>
+    <a th:href="@{/events/ticket}" role="button" class="btn btn-secondary">돌아가기</a>
+
+    <!--목록 출력 영역-->
+    <table class="table table-horizontal table-bordered">
+        <thead class="thead-strong">
+        <tr>
+            <th>예약번호</th>
+            <th>행사이름</th>
+            <th>입장권 가격</th>
+            <th>구매 수량</th>
+            <th>예약 날짜</th>
+            <th>예약 상태</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="reservation : ${reservationList}">
+            <td th:text="${reservation.id}"></td>
+            <td><a th:text="${reservation.eventName}" th:href="@{/events/ticket/detail/{id}(id=${reservation.id})}"></a></td>
+            <td th:text="${reservation.price}"></td>
+            <td th:text="${reservation.amount}"></td>
+            <td th:text="${#temporals.format(reservation.reservationDate, 'yyyy-MM-dd HH:mm:ss')} "></td>
+            <td th:text="${reservation.getReservationStatus}"></td>
+            <td>
+                <a th:href="@{/events/ticket/pay/{id}(id=${reservation.id})}" type="button" class="btn btn-primary">결제하기</a>
+                <button th:if="${reservation.reservationStatus.name() != 'CANCEL'}"  type="button" class="btn btn-danger btn-ticket-cancel">예약취소</button>
+                <input type="text" th:value="${reservation.id}" hidden/>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+</div>
+<footer th:insert="~{events/layout/ticket-footer :: footerFragment}"></footer>
+</body>
+</html>

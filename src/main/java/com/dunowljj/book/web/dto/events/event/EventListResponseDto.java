@@ -2,7 +2,6 @@ package com.dunowljj.book.web.dto.events.event;
 
 import com.dunowljj.book.domain.events.event.Event;
 import lombok.Getter;
-
 import java.time.LocalDateTime;
 
 @Getter

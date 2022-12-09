@@ -10,18 +10,18 @@
         <form role="form">
             <div class="form-group">
                 <label for="id">행사장 번호</label>
-                <input type="text" class="form-control" id="id" value="id" th:value="${hall.id}" readonly>
+                <input type="text" class="form-control" id="id" th:value="${hall.id}" readonly/>
             </div>
             <div class="form-group">
                 <label for="name">행사장 이름</label>
-                <input type="text" class="form-control" id="name" th:value="${hall.name}">
+                <input type="text" class="form-control" id="name" th:value="${hall.name}"/>
             </div>
             <div class="form-group">
                 <label for="capacity">수용 인원</label>
-                <input type="number" class="form-control" id="capacity" th:value="${hall.capacity}">
+                <input type="number" class="form-control" id="capacity" th:value="${hall.capacity}"/>
             </div>
         </form>
-        <a href="/events/hall/" role="button" class="btn btn-secondary">취소</a>
+        <a th:href="@{/events/hall/}" role="button" class="btn btn-secondary">취소</a>
         <button type="button" class="btn btn-primary" id="btn-hall-update">수정</button>
         <button type="button" class="btn btn-danger" id="btn-hall-delete">삭제</button>
     </div>

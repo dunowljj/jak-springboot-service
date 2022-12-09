@@ -26,7 +26,7 @@ public class HallService {
         return hallRepository.save(requestDto.toEntity()).getId();
     }
 
-    @Transactional
+    @Transactional(readOnly = true)
     public List<HallListResponseDto> findAllDesc() {
         return hallRepository.findAllDesc().stream()
                 .map(HallListResponseDto::new)
