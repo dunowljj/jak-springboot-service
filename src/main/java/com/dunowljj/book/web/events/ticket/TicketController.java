@@ -1,6 +1,7 @@
 package com.dunowljj.book.web.events.ticket;
 
 import com.dunowljj.book.service.events.event.EventService;
+import com.dunowljj.book.service.events.ticket.TicketPaymentService;
 import com.dunowljj.book.service.events.ticket.TicketReservationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -17,6 +18,7 @@ public class TicketController {
 
     private final EventService eventService;
     private final TicketReservationService reservationService;
+    private final TicketPaymentService paymentService;
 
     @GetMapping("/ticket/list")
     public String list(Model model) {
@@ -37,6 +39,7 @@ public class TicketController {
         return "/events/ticket/ticket-reserve";
     }
 
+    // todo : 자신의 예약만 보이도록 하기
     @GetMapping("/ticket/reserveList")
     public String reserveList(Model model) {
         model.addAttribute("reservationList", reservationService.findAllDESC());
@@ -50,4 +53,9 @@ public class TicketController {
         return "/events/ticket/ticket-pay";
     }
 
+    @GetMapping("/ticket/payList")
+    public String payList(Model model) {
+        model.addAttribute("paymentList", paymentService.findAllDESC());
+        return "/events/ticket/ticket-payList";
+    }
 }

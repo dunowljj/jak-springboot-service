@@ -15,7 +15,7 @@ public class TicketReservationListResponseDto {
     private String eventName;
     private Long eventId;
     private LocalDate reservationDate;
-    private ReservationStatus ticketStatus;
+    private ReservationStatus reservationStatus;
 
     public TicketReservationListResponseDto(TicketReservation entity) {
         this.id = entity.getId();
@@ -24,6 +24,6 @@ public class TicketReservationListResponseDto {
         this.eventName = entity.getEvent().getName();
         this.eventId = entity.getEvent().getId();
         this.reservationDate = entity.getReservationDate();
-        this.ticketStatus = entity.getReservationStatus();
+        this.reservationStatus = entity.getReservationStatus();
     }
 }

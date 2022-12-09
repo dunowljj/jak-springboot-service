@@ -17,7 +17,6 @@
             <th>구매 수량</th>
             <th>예약 날짜</th>
             <th>예약 상태</th>
-            <th></th>
         </tr>
         </thead>
         <tbody>
@@ -27,13 +26,12 @@
             <td th:text="${reservation.price}"></td>
             <td th:text="${reservation.amount}"></td>
             <td th:text="${#temporals.format(reservation.reservationDate, 'yyyy-MM-dd HH:mm:ss')} "></td>
-            <td th:text="${reservation.ticketStatus}"></td>
+            <td th:text="${reservation.getReservationStatus}"></td>
             <td>
                 <a th:href="@{/events/ticket/pay/{id}(id=${reservation.id})}" type="button" class="btn btn-primary">결제하기</a>
-                <button type="button" class="btn btn-danger" id="btn-ticket-cancel">예약취소</button>
+                <button th:if="${reservation.reservationStatus.name() != 'CANCEL'}"  type="button" class="btn btn-danger btn-ticket-cancel">예약취소</button>
+                <input type="text" th:value="${reservation.id}" hidden/>
             </td>
-
-            <input id="id" type="text" th:value="${reservation.id}" hidden/>
         </tr>
         </tbody>
     </table>

@@ -6,10 +6,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-
 import java.time.LocalDate;
 
-import static javax.persistence.FetchType.*;
+import static javax.persistence.FetchType.LAZY;
 import static javax.persistence.GenerationType.IDENTITY;
 
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -46,5 +45,10 @@ public class TicketPayment {
         this.total = total;
         this.payGroup = payGroup;
         this.payStatus = payStatus;
+    }
+
+    public void refund() {
+        this.payStatus = PayStatus.REFUND;
+        this.ticketReservation.cancel();
     }
 }
