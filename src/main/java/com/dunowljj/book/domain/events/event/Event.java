@@ -28,7 +28,7 @@ public class Event extends BaseTimeEntity {
 //    @Column(name = "events_id")
     private Long id;
 
-    @OneToOne(fetch = LAZY)
+    @ManyToOne(fetch = LAZY)
     @JoinColumn(name = "hall_id")
     private Hall hall;
 
