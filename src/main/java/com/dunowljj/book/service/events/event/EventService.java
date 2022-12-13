@@ -40,6 +40,9 @@ public class EventService {
         Hall hall = hallRepository.findById(hallId)
                 .orElseThrow(() -> new IllegalArgumentException("해당 행사장이 존재하지 않습니다. id =" + hallId));
 
+        if (hall.isUSING()) throw new IllegalArgumentException("이미 사용중인 행사장입니다. id=" + hallId);
+        if (hall.isSUSPEND()) throw new IllegalArgumentException("사용 중지된 행사장입니다. id=" + hallId);
+
         Event event = requestDto.toEntity(hall);
 
         EventRegistration eventRegistration = EventRegistration.builder()
@@ -63,6 +66,9 @@ public class EventService {
         Long hallId = requestDto.getHallId();
         Hall hall = hallRepository.findById(hallId)
                 .orElseThrow(() -> new IllegalArgumentException("해당 행사장이 존재하지 않습니다. id =" + hallId));
+
+        if (hall.isUSING()) throw new IllegalArgumentException("이미 사용중인 행사장입니다. id=" + hallId);
+        if (hall.isSUSPEND()) throw new IllegalArgumentException("사용 중지된 행사장입니다. id=" + hallId);
 
         Event event = eventRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("해당 행사가 존재하지 않습니다. id =" + id));

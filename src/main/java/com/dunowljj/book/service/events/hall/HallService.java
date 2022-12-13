@@ -2,7 +2,6 @@ package com.dunowljj.book.service.events.hall;
 
 import com.dunowljj.book.domain.events.hall.Hall;
 import com.dunowljj.book.domain.events.hall.HallRepository;
-import com.dunowljj.book.domain.posts.Posts;
 import com.dunowljj.book.web.dto.events.hall.HallListResponseDto;
 import com.dunowljj.book.web.dto.events.hall.HallSaveRequestDto;
 import com.dunowljj.book.web.dto.events.hall.HallUpdateRequestDto;
@@ -28,7 +27,7 @@ public class HallService {
 
     @Transactional(readOnly = true)
     public List<HallListResponseDto> findAllDesc() {
-        return hallRepository.findAllDesc().stream()
+        return hallRepository.findAllDESC().stream()
                 .map(HallListResponseDto::new)
                 .collect(Collectors.toList());
     }
@@ -54,5 +53,9 @@ public class HallService {
                 .orElseThrow(() -> new IllegalArgumentException("해당 행사장이 존재하지 않습니다. id =" + id));
         hallRepository.delete(hall);
         return;
+    }
+
+    public List<Hall> findAllReadyDESC() {
+        return hallRepository.findAllReadyDESC();
     }
 }
