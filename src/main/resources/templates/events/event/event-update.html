@@ -10,19 +10,19 @@
         <form role="form">
             <div class="form-group">
                 <label for="id">행사 번호</label>
-                <input type="text" class="form-control" id="id" th:value = "${event.id}" readonly/>
+                <input type="text" class="form-control" id="id" th:value="${event.id}" readonly/>
             </div>
             <div class="form-group">
                 <label for="name">행사명</label>
-                <input type="text" class="form-control" id="name" th:value = "${event.name}"/>
+                <input type="text" class="form-control" id="name" th:value="${event.name}"/>
             </div>
             <div class="form-group">
                 <label for="hallId">행사장 선택</label>
-                <input type="number" class="form-control" id="hallId" th:value = "${event.hallId}"/>
+                <input type="number" class="form-control" id="hallId" th:value="${event.hallId}"/>
             </div>
             <div class="form-group">
                 <label for="field">행사 분야</label>
-                <input class="form-control" id="field" th:value = "${event.field}"/>
+                <input class="form-control" id="field" th:value="${event.field}"/>
             </div>
             <div class="form-group">
                 <label for="detail">행사 설명</label>
@@ -30,27 +30,27 @@
             </div>
             <div class="form-group">
                 <label for="price">입장권 가격</label>
-                <input class="form-control" id="price" th:value = "${event.price}"/>
+                <input class="form-control" id="price" th:value="${event.price}"/>
             </div>
             <div class="form-group">
                 <label for="recruitAmount">모집 인원</label>
-                <input class="form-control" id="recruitAmount" th:value = "${event.recruitAmount}"/>
+                <input class="form-control" id="recruitAmount" th:value="${event.recruitAmount}"/>
             </div>
             <div class="form-group">
                 <label for="startDate">행사 시작일</label>
-                <input type = "datetime-local" class="form-control" id="startDate" th:value = "${event.startDate}"/>
+                <input th:min="${#temporals.format(#temporals.createNow(), 'yyyy-MM-dd hh:mm')}" type="datetime-local" class="form-control" id="startDate" th:value="${#temporals.format(event.startDate,'yyyy-MM-dd hh:mm')}"/>
             </div>
             <div class="form-group">
                 <label for="endDate">행사 종료일</label>
-                <input type = "datetime-local" class="form-control" id="endDate" th:value = "${event.endDate}"/>
+                <input th:min="${#temporals.format(#temporals.createNow(), 'yyyy-MM-dd hh:mm')}" type="datetime-local" class="form-control" id="endDate" th:value="${#temporals.format(event.endDate,'yyyy-MM-dd hh:mm')}"/>
             </div>
             <div class="form-group">
                 <label for="recruitStartDate">모집 시작일</label>
-                <input type = "datetime-local" class="form-control" id="recruitStartDate" th:value = "${event.recruitStartDate}"/>
+                <input th:min="${#temporals.format(#temporals.createNow(), 'yyyy-MM-dd hh:mm')}" type="datetime-local" class="form-control" id="recruitStartDate" th:value="${#temporals.format(event.recruitStartDate,'yyyy-MM-dd hh:mm')}"/>
             </div>
             <div class="form-group">
                 <label for="recruitEndDate">모집 마감일</label>
-                <input type = "datetime-local" class="form-control" id="recruitEndDate"th:value = "${event.recruitEndDate}"/>
+                <input th:min="${#temporals.format(#temporals.createNow(), 'yyyy-MM-dd hh:mm')}" type="datetime-local" class="form-control" id="recruitEndDate"th:value="${#temporals.format(event.recruitEndDate,'yyyy-MM-dd hh:mm')}"/>
             </div>
         </form>
         <a th:href="@{/events/event/list}" role="button" class="btn btn-secondary">취소</a>

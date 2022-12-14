@@ -39,19 +39,19 @@
             </div>
             <div class="form-group">
                 <label for="startDate">행사 시작일</label>
-                <input type="datetime-local" class="form-control" id="startDate" placeholder="내용을 입력하세요"/>
+                <input th:min="${#temporals.format(#temporals.createNow(), 'yyyy-MM-dd hh:mm')}" th:attr="min=${#temporals.format(#temporals.createNow(), 'yyyy-MM-dd')}" th:type="datetime-local" class="form-control" id="startDate" placeholder="내용을 입력하세요"/>
             </div>
             <div class="form-group">
                 <label for="endDate">행사 종료일</label>
-                <input type="datetime-local" class="form-control" id="endDate" placeholder="내용을 입력하세요"/>
+                <input th:min="${#temporals.format(#temporals.createNow(), 'yyyy-MM-dd hh:mm')}" th:type="datetime-local" class="form-control" id="endDate" placeholder="내용을 입력하세요"/>
             </div>
             <div class="form-group">
                 <label for="recruitStartDate">모집 시작일</label>
-                <input type="datetime-local" class="form-control" id="recruitStartDate" placeholder="내용을 입력하세요"/>
+                <input th:min="${#temporals.format(#temporals.createNow(), 'yyyy-MM-dd hh:mm')}" th:type="datetime-local" class="form-control" id="recruitStartDate" placeholder="내용을 입력하세요"/>
             </div>
             <div class="form-group">
                 <label for="recruitEndDate">모집 마감일</label>
-                <input type="datetime-local" class="form-control" id="recruitEndDate" placeholder="내용을 입력하세요" value="today"/>
+                <input th:min="${#temporals.format(#temporals.createNow(), 'yyyy-MM-dd hh:mm')}" th:type="datetime-local" class="form-control" id="recruitEndDate" placeholder="내용을 입력하세요"/>
             </div>
         </form>
         <a th:href="@{/events/event}" role="button" class="btn btn-secondary">취소</a>
