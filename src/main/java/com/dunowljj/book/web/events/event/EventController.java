@@ -2,6 +2,7 @@ package com.dunowljj.book.web.events.event;
 
 
 import com.dunowljj.book.service.events.event.EventService;
+import com.dunowljj.book.service.events.hall.HallService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,10 +15,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class EventController {
 
+    private final HallService hallService;
     private final EventService eventService;
 
     @GetMapping("/event/save")
-    public String save() {
+    public String save(Model model) {
+        model.addAttribute("hallList", hallService.findAllReadyDESC());
         return "events/event/event-save";
     }
 

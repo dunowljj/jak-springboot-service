@@ -14,6 +14,7 @@
       <th>행사장번호</th>
       <th>행사장이름</th>
       <th>수용인원</th>
+      <th>대여 상태</th>
       <th>생성일</th>
       <th>최종수정일</th>
     </tr>
@@ -23,6 +24,7 @@
         <td th:text="${hall.id}"></td>
         <td><a th:text="${hall.name}" th:href="@{update/{id}(id=${hall.id})}"></a></td>
         <td th:text="${hall.capacity}"></td>
+        <td th:text="${hall.rentalStatus}"></td>
         <td th:text="${#temporals.format(hall.createdDate, 'yyyy-MM-dd HH:mm:ss')}"></td>
         <td th:text="${#temporals.format(hall.modifiedDate, 'yyyy-MM-dd HH:mm:ss')}"></td>
       </tr>

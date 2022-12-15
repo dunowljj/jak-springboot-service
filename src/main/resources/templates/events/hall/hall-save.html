@@ -13,6 +13,15 @@
                 <label for="capacity">수용 인원</label>
                 <input type="number" class="form-control" id="capacity" placeholder="작성자를 입력하세요"/>
             </div>
+            <div class="form-group">
+                <label>대여 상태</label>
+                <select class="form-control" id="rentalStatus">
+                    <option th:each="RentalStatusValue : ${T(com.dunowljj.book.domain.events.hall.RentalStatus).values()}"
+                            th:value="${RentalStatusValue.name()}"
+                            th:text="${RentalStatusValue.name()}">
+                    </option>
+                </select>
+            </div>
         </form>
         <a th:href="@{/events/hall/}" role="button" class="btn btn-secondary">취소</a>
         <button type="button" class="btn btn-primary" id="btn-hall-save">등록</button>

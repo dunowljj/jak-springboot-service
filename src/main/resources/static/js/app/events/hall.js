@@ -16,7 +16,8 @@ var main = {
     save: function () {
         var data = {
             name: $('#name').val(),
-            capacity: $('#capacity').val()
+            capacity: $('#capacity').val(),
+            rentalStatus: $('#rentalStatus').val()
         };
 
         $.ajax({

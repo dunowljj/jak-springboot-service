@@ -9,5 +9,8 @@ public interface HallRepository extends JpaRepository<Hall, Long> {
 
     // todo : 다른 방식 찾아보기
     @Query("SELECT h FROM Hall h ORDER BY h.id DESC")
-    List<Hall> findAllDesc();
+    List<Hall> findAllDESC();
+
+    @Query("SELECT h FROM Hall h WHERE h.rentalStatus = 'READY' ORDER BY h.id DESC")
+    List<Hall> findAllReadyDESC();
 }
