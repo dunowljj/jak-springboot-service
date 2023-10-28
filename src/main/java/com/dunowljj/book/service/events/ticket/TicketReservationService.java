@@ -33,7 +33,7 @@ public class TicketReservationService {
         EventRegistration registration = eventRegistrationRepository.findById(eventId)
                 .orElseThrow(() -> new IllegalArgumentException("해당 행사등록정보가 존재하지 않습니다. id=" + eventId));
 
-       return reservationRepository.save(requestDto.toEntity(event, registration.getMember())).getId();
+       return reservationRepository.save(requestDto.toEntity(event, registration.getUser())).getId();
     }
 
     @Transactional(readOnly = true)

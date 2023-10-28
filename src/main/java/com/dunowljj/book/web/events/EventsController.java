@@ -1,7 +1,7 @@
 package com.dunowljj.book.web.events;
 
-import com.dunowljj.book.config.auth.LoginUser;
-import com.dunowljj.book.config.auth.SessionUser;
+import com.dunowljj.book.config.security.auth.LoginUser;
+import com.dunowljj.book.config.security.auth.SessionUser;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;

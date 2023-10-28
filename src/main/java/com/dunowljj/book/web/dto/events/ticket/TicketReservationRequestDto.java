@@ -3,7 +3,7 @@ package com.dunowljj.book.web.dto.events.ticket;
 import com.dunowljj.book.domain.events.event.Event;
 import com.dunowljj.book.domain.events.ticket.ReservationStatus;
 import com.dunowljj.book.domain.events.ticket.TicketReservation;
-import com.dunowljj.book.domain.user.Member;
+import com.dunowljj.book.domain.user.User;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -27,10 +27,10 @@ public class TicketReservationRequestDto {
         this.reservationDate = reservationDate;
     }
 
-    public TicketReservation toEntity(Event event, Member member) {
+    public TicketReservation toEntity(Event event, User user) {
         return TicketReservation.builder()
                 .event(event)
-                .member(member)
+                .user(user)
                 .price(price)
                 .amount(amount)
                 .reservationDate(reservationDate)

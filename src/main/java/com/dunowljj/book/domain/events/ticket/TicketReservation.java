@@ -1,7 +1,7 @@
 package com.dunowljj.book.domain.events.ticket;
 
 import com.dunowljj.book.domain.events.event.Event;
-import com.dunowljj.book.domain.user.Member;
+import com.dunowljj.book.domain.user.User;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
@@ -19,7 +19,7 @@ import static javax.persistence.GenerationType.IDENTITY;
 public class TicketReservation {
 
     @Id @GeneratedValue(strategy = IDENTITY)
-//    @Column(name = "ticket_reservation_id")
+    @Column(name = "ticket_reservation_id")
     private Long id;
 
     @ManyToOne(fetch = LAZY)
@@ -27,8 +27,8 @@ public class TicketReservation {
     private Event event;
 
     @ManyToOne(fetch = LAZY)
-    @JoinColumn(name = "member_id")
-    private Member member;
+    @JoinColumn(name = "user_id")
+    private User user;
 
 //    @OneToOne(fetch = LAZY)
 //    private TicketPayment ticketPayment;
@@ -47,10 +47,10 @@ public class TicketReservation {
     private ReservationStatus reservationStatus;
 
     @Builder
-    public TicketReservation(Long id, Event event, Member member, Long price, Long amount, LocalDate reservationDate, ReservationStatus reservationStatus) {
+    public TicketReservation(Long id, Event event, User user, Long price, Long amount, LocalDate reservationDate, ReservationStatus reservationStatus) {
         this.id = id;
         this.event = event;
-        this.member = member;
+        this.user = user;
         this.price = price;
         this.amount = amount;
         this.reservationDate = reservationDate;

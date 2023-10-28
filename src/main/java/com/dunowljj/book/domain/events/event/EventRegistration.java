@@ -1,8 +1,7 @@
 package com.dunowljj.book.domain.events.event;
 
 import com.dunowljj.book.domain.BaseTimeEntity;
-import com.dunowljj.book.domain.user.Member;
-import lombok.AccessLevel;
+import com.dunowljj.book.domain.user.User;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -28,14 +27,14 @@ public class EventRegistration extends BaseTimeEntity {
     private Event event;
 
     @ManyToOne(fetch = LAZY)
-    @JoinColumn(name = "member_id")
-    private Member member;
+    @JoinColumn(name = "user_id")
+    private User user;
 
     @Builder
-    public EventRegistration(Long id, Event event, Member member) {
+    public EventRegistration(Long id, Event event, User user) {
         this.id = id;
         this.event = event;
-        this.member = member;
+        this.user = user;
     }
 
 }

@@ -16,7 +16,7 @@ Spring Boot, Spring Data JPA 학습용 프로젝트
 
 ## 요구사항 및 설계
 ### 이전 프로젝트 추출본
-<img width="700" alt="before_erd" src="https://member-images.githubusercontent.com/92416661/200156225-a3129ded-501b-416d-9392-690a5ebe7d3b.png">
+<img width="700" alt="before_erd" src="https://user-images.githubusercontent.com/92416661/200156225-a3129ded-501b-416d-9392-690a5ebe7d3b.png">
 
 ### 1차 요구사항
 - 회원은 소셜 로그인이 가능하다. 
@@ -27,7 +27,7 @@ Spring Boot, Spring Data JPA 학습용 프로젝트
 + 임의로 행사는 그냥 등록 가능 (후에 회원 등급 나누기)
 + 모두 약식, 간단한 버튼만 구현
 
-<img width="715" alt="model" src="https://member-images.githubusercontent.com/92416661/200159010-aa984ce8-e135-4ecb-acf7-ea12bfe9a84f.png">
+<img width="715" alt="model" src="https://user-images.githubusercontent.com/92416661/200159010-aa984ce8-e135-4ecb-acf7-ea12bfe9a84f.png">
 
 **UI** 
 - 로그인/로그아웃, 행사등록/조회, 티켓예약/예약목록, 티켓결제/결제목록

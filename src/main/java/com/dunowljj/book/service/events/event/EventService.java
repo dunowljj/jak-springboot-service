@@ -1,14 +1,14 @@
 package com.dunowljj.book.service.events.event;
 
-import com.dunowljj.book.config.auth.SessionUser;
+import com.dunowljj.book.config.security.auth.SessionUser;
 import com.dunowljj.book.domain.events.event.Event;
 import com.dunowljj.book.domain.events.event.EventRegistration;
 import com.dunowljj.book.domain.events.event.EventRegistrationRepository;
 import com.dunowljj.book.domain.events.event.EventRepository;
 import com.dunowljj.book.domain.events.hall.Hall;
 import com.dunowljj.book.domain.events.hall.HallRepository;
-import com.dunowljj.book.domain.user.Member;
-import com.dunowljj.book.domain.user.MemberRepository;
+import com.dunowljj.book.domain.user.User;
+import com.dunowljj.book.domain.user.UserRespository;
 import com.dunowljj.book.web.dto.events.event.EventListResponseDto;
 import com.dunowljj.book.web.dto.events.event.EventResponseDto;
 import com.dunowljj.book.web.dto.events.event.EventSaveRequestDto;
@@ -28,12 +28,12 @@ public class EventService {
     private final EventRepository eventRepository;
     private final EventRegistrationRepository registrationRepository;
 
-    private final MemberRepository memberRepository;
+    private final UserRespository userRespository;
     private final HallRepository hallRepository;
 
     @Transactional
-    public Long save(EventSaveRequestDto requestDto, SessionUser user) {
-        Member member = memberRepository.findByEmail(user.getEmail())
+    public Long save(EventSaveRequestDto requestDto, SessionUser sessionUser) {
+        User user = userRespository.findByEmail(sessionUser.getEmail())
                 .orElseThrow(() -> new IllegalArgumentException("로그인 후에 이용해 주세요"));
 
         Long hallId = requestDto.getHallId();
@@ -46,7 +46,7 @@ public class EventService {
         Event event = requestDto.toEntity(hall);
 
         EventRegistration eventRegistration = EventRegistration.builder()
-                .member(member)
+                .user(user)
                 .event(event)
                 .build();
 

@@ -1,7 +1,7 @@
 package com.dunowljj.book.web;
 
-import com.dunowljj.book.config.auth.LoginUser;
-import com.dunowljj.book.config.auth.SessionUser;
+import com.dunowljj.book.config.security.auth.LoginUser;
+import com.dunowljj.book.config.security.auth.SessionUser;
 import com.dunowljj.book.service.posts.PostsService;
 import com.dunowljj.book.web.dto.posts.PostsResponseDto;
 import lombok.RequiredArgsConstructor;

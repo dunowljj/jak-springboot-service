@@ -4,20 +4,18 @@ import com.dunowljj.book.domain.BaseTimeEntity;
 import com.dunowljj.book.domain.events.hall.Hall;
 import com.dunowljj.book.domain.events.ticket.TicketReservation;
 import com.dunowljj.book.web.dto.events.event.EventUpdateRequestDto;
-import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-import static javax.persistence.FetchType.*;
-import static javax.persistence.GenerationType.*;
-import static lombok.AccessLevel.*;
+import static javax.persistence.FetchType.LAZY;
+import static javax.persistence.GenerationType.IDENTITY;
+import static lombok.AccessLevel.PROTECTED;
 
 @NoArgsConstructor(access = PROTECTED)
 @Getter
@@ -25,7 +23,7 @@ import static lombok.AccessLevel.*;
 public class Event extends BaseTimeEntity {
 
     @Id @GeneratedValue(strategy = IDENTITY)
-//    @Column(name = "events_id")
+    @Column(name = "events_id")
     private Long id;
 
     @ManyToOne(fetch = LAZY)
