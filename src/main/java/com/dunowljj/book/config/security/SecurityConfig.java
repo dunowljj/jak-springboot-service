@@ -1,5 +1,7 @@
-package com.dunowljj.book.config.auth;
+package com.dunowljj.book.config.security;
 
+import com.dunowljj.book.config.security.auth.CustomOAuth2UserService;
+import com.dunowljj.book.config.security.jwt.JwtAuthenticationFilter;
 import com.dunowljj.book.domain.user.Role;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplication;
@@ -11,15 +13,19 @@ import org.springframework.core.annotation.Order;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @RequiredArgsConstructor
-@EnableWebSecurity
+@EnableWebSecurity(debug = true)
 @Configuration(proxyBeanMethods = false)
 @ConditionalOnDefaultWebSecurity
 @ConditionalOnWebApplication(type = ConditionalOnWebApplication.Type.SERVLET)
 public class SecurityConfig  {
 
+    private final JwtAuthenticationFilter jwtAuthenticationFilter;
     private final CustomOAuth2UserService customOAuth2UserService;
+    private final AuthenticationSuccessHandler authenticationSuccessHandler;
 
     @Bean
     @Order(SecurityProperties.BASIC_AUTH_ORDER)
@@ -29,23 +35,25 @@ public class SecurityConfig  {
                 .csrf().disable()
                 .headers().frameOptions().disable()
                 .and()
+                    .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
                     .authorizeRequests()
-                    .antMatchers("/", "/css/**", "/images/**",
-                            "/js/**", "/h2-console/**").permitAll()
+                    .antMatchers("/", "/css/**", "/images/**", "/js/**", "/h2-console/**").permitAll()
                     .antMatchers("/api/**").hasRole(Role.GUEST.name())
                     .anyRequest().authenticated()
                 .and()
                     .logout()
-                        .logoutSuccessUrl("/")
+                    .logoutSuccessUrl("/")
                 .and()
-                    .oauth2Login()
-                        .userInfoEndpoint()
-                            .userService(customOAuth2UserService);
+                .oauth2Login()
+                    .successHandler(authenticationSuccessHandler)
+                    .userInfoEndpoint()
+                        .userService(customOAuth2UserService);
 
         http.headers().frameOptions().sameOrigin();
 
         return http.build();
     }
+
 
 }
 

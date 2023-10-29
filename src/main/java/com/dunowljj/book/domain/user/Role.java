@@ -11,4 +11,14 @@ public enum Role {
 
     private final String key;
     private final String title;
+
+    public static Role findRoleByKey(String key) {
+        for (Role role : Role.values()) {
+            if (key.equals(role.getKey())) {
+                return role;
+            }
+        }
+
+        return Role.GUEST;
+    }
 }

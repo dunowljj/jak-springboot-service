@@ -1,4 +1,4 @@
-package com.dunowljj.book.config.auth;
+package com.dunowljj.book.config.security.auth;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.MethodParameter;

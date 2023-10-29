@@ -1,4 +1,4 @@
-package com.dunowljj.book.config.auth;
+package com.dunowljj.book.config.security.auth;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
