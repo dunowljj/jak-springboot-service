@@ -1,8 +1,7 @@
-package com.dunowljj.book.config.security.jwt;
+package com.dunowljj.book.security.jwt.util;
 
-import com.dunowljj.book.config.security.jwt.dto.JwtUserClaimsDto;
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
+import com.dunowljj.book.security.jwt.dto.JwtUserClaimsDto;
+import io.jsonwebtoken.*;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
@@ -69,5 +68,30 @@ public class JwtUtils {
             SIGNATURE_KEY = new SecretKeySpec(byteSecretKey, SignatureAlgorithm.HS256.getJcaName());
         }
         return SIGNATURE_KEY;
+    }
+
+    public static boolean validateToken(String jwt) {
+
+        Claims claims = getClaims(jwt);
+
+        if (!ISSUER.equals(claims.get("iss"))) {
+            throw new JwtException("Issuer가 일치하지 않습니다.");
+        }
+
+        Date expiration = claims.getExpiration();
+        if (expiration.before(new Date())) {
+            throw new JwtException("토큰이 만료되었습니다.");
+        }
+
+        return true;
+    }
+
+    public static Claims getClaims(String token) throws JwtException {
+        Jws<Claims> claimsJws = Jwts.parserBuilder()
+                .setSigningKey(generateKey())
+                .build()
+                .parseClaimsJws(token);
+
+        return claimsJws.getBody();
     }
 }

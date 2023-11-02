@@ -1,24 +1,37 @@
-package com.dunowljj.book.config.security.auth;
+package com.dunowljj.book.security.oauth;
 
-import com.dunowljj.book.config.security.auth.dto.OAuthAttributes;
+import com.dunowljj.book.security.oauth.dto.OAuthAttributes;
+import com.dunowljj.book.security.jwt.dto.JwtUserClaimsDto;
 import com.dunowljj.book.domain.user.Role;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.oauth2.core.user.DefaultOAuth2User;
 
 import java.util.Collection;
+import java.util.Collections;
 import java.util.Map;
 
-public class OAuth2UserDetails extends DefaultOAuth2User implements UserDetails {
+public class OAuth2JwtUserDetails extends DefaultOAuth2User implements UserDetails {
 
     private final OAuthAttributes oAuthAttributes;
 
-    public OAuth2UserDetails(
+    public OAuth2JwtUserDetails(
             Collection<? extends GrantedAuthority> authorities,
             OAuthAttributes oAuthAttributes
     ) {
         super(authorities, oAuthAttributes.getAttributes(), oAuthAttributes.getNameAttributeKey());
         this.oAuthAttributes = oAuthAttributes;
+    }
+
+    public OAuth2JwtUserDetails(JwtUserClaimsDto userClaimsDto) {
+        super(Collections.singleton(
+                new SimpleGrantedAuthority(userClaimsDto.getRole().getKey())),
+                null,
+                null);
+        this.oAuthAttributes = OAuthAttributes.builder()
+                .email(userClaimsDto.getEmail())
+                .build();
     }
 
     @Override

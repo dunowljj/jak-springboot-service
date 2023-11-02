@@ -1,4 +1,4 @@
-package com.dunowljj.book.config.security.auth.dto;
+package com.dunowljj.book.security.oauth.dto;
 
 import com.dunowljj.book.domain.user.Role;
 import com.dunowljj.book.domain.user.User;

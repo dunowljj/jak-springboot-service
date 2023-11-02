@@ -1,6 +1,6 @@
-package com.dunowljj.book.config.security.auth;
+package com.dunowljj.book.security.oauth;
 
-import com.dunowljj.book.config.security.auth.dto.OAuthAttributes;
+import com.dunowljj.book.security.oauth.dto.OAuthAttributes;
 import com.dunowljj.book.domain.user.User;
 import com.dunowljj.book.domain.user.UserRespository;
 import lombok.RequiredArgsConstructor;
@@ -39,7 +39,7 @@ public class CustomOAuth2UserService implements OAuth2UserService<OAuth2UserRequ
 
         httpSession.setAttribute("user", new SessionUser(user));
 
-        return new OAuth2UserDetails (
+        return new OAuth2JwtUserDetails(
                 Collections.singleton(new SimpleGrantedAuthority(user.getRoleKey())),
                 attributes
         );

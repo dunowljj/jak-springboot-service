@@ -1,8 +1,12 @@
-package com.dunowljj.book.config.security.auth;
+package com.dunowljj.book.security.oauth.handler;
 
-import com.dunowljj.book.config.security.jwt.JwtUtils;
-import com.dunowljj.book.config.security.jwt.dto.JwtUserClaimsDto;
-import com.dunowljj.book.domain.user.Role;
+import com.dunowljj.book.security.jwt.dto.JwtUserClaimsDto;
+import com.dunowljj.book.security.jwt.util.JwtUtils;
+import com.dunowljj.book.security.oauth.OAuth2JwtUserDetails;
+import com.dunowljj.book.security.oauth.dto.LoginResponseDto;
+import com.dunowljj.book.domain.user.User;
+import com.dunowljj.book.domain.user.UserRespository;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseCookie;
@@ -26,45 +30,39 @@ public class Oauth2AuthenticationSuccessHandler implements AuthenticationSuccess
     private final int EXPIRATION = 60 * 60 * 24 * 30;
     private RequestCache requestCache = new HttpSessionRequestCache();
 
+    private final UserRespository userRespository;
+
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
+        OAuth2JwtUserDetails oAuth2User = (OAuth2JwtUserDetails) authentication.getPrincipal();
+        JwtUserClaimsDto jwtUserClaimsDto = JwtUserClaimsDto.of(oAuth2User);
 
-        OAuth2UserDetails oAuth2User = (OAuth2UserDetails) authentication.getPrincipal();
-
-        Role role = oAuth2User.findAnyFirstRole();
-        String email = oAuth2User.getEmail();
-
-        JwtUserClaimsDto jwtUserClaimsDto = JwtUserClaimsDto.builder()
-                .role(role)
-                .email(email)
-                .build();
-
-        // 토큰 생성 및 추가 로직
-        String accessToken = JwtUtils.generateAccessToken(jwtUserClaimsDto);
-        String refreshToken = JwtUtils.generateRefreshToken(jwtUserClaimsDto);
-
-        response.addHeader(AUTH_HEADER, TOKEN_TYPE + accessToken);
-        response.setContentType(MediaType.APPLICATION_JSON_VALUE);
-        response.setHeader("Set-Cookie", getRefreshTokenCookie(refreshToken).toString());
-        response.setCharacterEncoding("UTF-8");
+        addTokensInHeader(response, jwtUserClaimsDto);
 
         /**
          * 로그인 정보를 응답에 반환하는 경우 -> 여기에 이전 url 넣어줘도 될듯
          */
-        /*User user = userRespository.findByEmail(email).orElseThrow(() -> new IllegalArgumentException("해당 유저가 존재하지 않습니다."));
-        LoginResponseDto loginResponseDto = LoginResponseDto.builder()
-                .nickname(user.getNickname())
-                .email(user.getEmail())
-                .userImg(user.getPicture())
-                .build();
+        String email = oAuth2User.getEmail();
+        User user = userRespository.findByEmail(email).orElseThrow(() -> new IllegalArgumentException("해당 유저가 존재하지 않습니다."));
 
         ObjectMapper objectMapper = new ObjectMapper();
-        objectMapper.writeValue(response.getWriter(), loginResponseDto);*/
+        objectMapper.writeValue(response.getWriter(), LoginResponseDto.of(user));
 
-        redirectToCachedUrl(request, response);
+//        redirectToCachedUrl(request, response);
     }
 
-    private ResponseCookie getRefreshTokenCookie(String refreshToken) {
+    private void addTokensInHeader(HttpServletResponse response, JwtUserClaimsDto jwtUserClaimsDto) {
+        String accessToken = JwtUtils.generateAccessToken(jwtUserClaimsDto);
+        String refreshToken = JwtUtils.generateRefreshToken(jwtUserClaimsDto);
+
+        response.addHeader(AUTH_HEADER, TOKEN_TYPE + accessToken);
+
+        response.setContentType(MediaType.APPLICATION_JSON_VALUE);
+        response.setHeader("Set-Cookie", createRefreshTokenCookie(refreshToken).toString());
+        response.setCharacterEncoding("UTF-8");
+    }
+
+    private ResponseCookie createRefreshTokenCookie(String refreshToken) {
         return ResponseCookie.from(REFRESH_TOKEN, refreshToken)
                 .maxAge(EXPIRATION)
                 .path(HOME_URL)
@@ -75,6 +73,10 @@ public class Oauth2AuthenticationSuccessHandler implements AuthenticationSuccess
     }
 
     // 인증 전 요청했던 요청 url 받아오기
+
+    // 첫 유저인지
+    // isExistUser -> 닉네임 입력 혹은 url로 요청
+    // -> 저장된 url (없으면 : "/", 있으면 : 기존요청)
     private void redirectToCachedUrl(HttpServletRequest request, HttpServletResponse response) throws IOException {
         SavedRequest savedRequest = requestCache.getRequest(request, response);
         if (savedRequest != null) {

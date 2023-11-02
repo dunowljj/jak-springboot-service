@@ -1,6 +1,6 @@
 package com.dunowljj.book.service.events.event;
 
-import com.dunowljj.book.config.security.auth.SessionUser;
+import com.dunowljj.book.security.oauth.SessionUser;
 import com.dunowljj.book.domain.events.event.Event;
 import com.dunowljj.book.domain.events.event.EventRegistration;
 import com.dunowljj.book.domain.events.event.EventRegistrationRepository;

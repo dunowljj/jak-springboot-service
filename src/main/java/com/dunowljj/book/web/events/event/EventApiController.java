@@ -1,7 +1,7 @@
 package com.dunowljj.book.web.events.event;
 
-import com.dunowljj.book.config.security.auth.LoginUser;
-import com.dunowljj.book.config.security.auth.SessionUser;
+import com.dunowljj.book.security.oauth.LoginUser;
+import com.dunowljj.book.security.oauth.SessionUser;
 import com.dunowljj.book.service.events.event.EventService;
 import com.dunowljj.book.web.dto.events.event.EventSaveRequestDto;
 import com.dunowljj.book.web.dto.events.event.EventUpdateRequestDto;

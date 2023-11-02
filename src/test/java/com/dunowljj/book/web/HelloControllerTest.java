@@ -1,6 +1,6 @@
 package com.dunowljj.book.web;
 
-import com.dunowljj.book.config.security.SecurityConfig;
+import com.dunowljj.book.security.SecurityConfig;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;

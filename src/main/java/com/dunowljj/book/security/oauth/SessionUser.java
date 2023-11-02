@@ -1,4 +1,4 @@
-package com.dunowljj.book.config.security.auth;
+package com.dunowljj.book.security.oauth;
 
 import com.dunowljj.book.domain.user.User;
 import lombok.Getter;

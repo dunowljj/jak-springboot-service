@@ -1,4 +1,4 @@
-package com.dunowljj.book.config.security.jwt;
+package com.dunowljj.book.security.jwt.details;
 
 import com.dunowljj.book.domain.user.User;
 import lombok.RequiredArgsConstructor;
@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 @RequiredArgsConstructor
-public class jwtUserDetails implements UserDetails {
+public class JwtUserDetails implements UserDetails {
 
     private final User user;
 

@@ -1,6 +1,6 @@
 package com.dunowljj.book.config;
 
-import com.dunowljj.book.config.security.auth.LoginUserArgumentResolver;
+import com.dunowljj.book.security.oauth.LoginUserArgumentResolver;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
